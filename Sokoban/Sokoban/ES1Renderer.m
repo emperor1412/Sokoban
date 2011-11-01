@@ -134,7 +134,7 @@
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ALPHA);
 	
 	// Set the colour to use when clearing the screen with glClear
-	glClearColor(0.23455f, 0.2345f, 0.2655f, 1.0f);
+	glClearColor(1.0, 1.0, 1.0, 1.0f);
     
 	// We are not using the depth buffer in our 2D game so depth testing can be disabled.  If depth
 	// testing was required then a depth buffer would need to be created as well as enabling the depth

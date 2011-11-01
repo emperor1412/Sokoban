@@ -129,12 +129,12 @@
 		[ghostSprites release];
         
         Image *robotImage = [[Image alloc] initWithImageNamed:@"RobotSpriteSheet2.png" filter:GL_LINEAR];
-        robotImage.color = Color4fMake(0.56742, 0.922, 0.886, 1.0);
+//        robotImage.color = Color4fMake(0.56742, 0.922, 0.886, 1.0);
         robotSpriteSheet = [SpriteSheet spriteSheetForImage:robotImage sheetKey:@"Robot" spriteSize:CGSizeMake(75, 75) spacing:0 margin:0];
 //        robot = [SpriteSheet spriteSheetForImageNamed:@"RobotSpriteSheet2.png" spriteSize:CGSizeMake(75, 75) spacing:0 margin:0 imageFilter:GL_LINEAR];
         
         
-        delay = 1.0;
+        delay = 0.075f;
         robotAnim = [[Animation alloc] init];                        
     
         [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 0)] delay:delay];
@@ -174,7 +174,7 @@
     myImage.rotation -= (360 * aDelta);
 
 	// Reverse the scaling factor when we reach the limits defined below
-	if (myImage.scale.x >= 5 || myImage.scale.x <= 1) {
+	if (myImage.scale.x >= 2.5 || myImage.scale.x <= 1) {
 		scaleAmount *= -1;
 	}
 	
@@ -199,7 +199,7 @@
 	[sharedImageRenderManager renderImages];
      
     
-    [robotAnim renderCenteredAtPoint:CGPointMake(160, 240)];
+    [robotAnim renderCenteredAtPoint:CGPointMake(160, 240) scale:myImage.scale rotation:0.0];
     [aRobotFrame renderCenteredAtPoint:CGPointMake(50, 100)];
     
 }
