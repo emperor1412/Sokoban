@@ -134,23 +134,24 @@
 //        robot = [SpriteSheet spriteSheetForImageNamed:@"RobotSpriteSheet2.png" spriteSize:CGSizeMake(75, 75) spacing:0 margin:0 imageFilter:GL_LINEAR];
         
         
-        delay = 0.3;
+        delay = 1.0;
         robotAnim = [[Animation alloc] init];                        
     
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 2)] delay:delay];
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(1, 2)] delay:delay];        
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 2)] delay:delay];       
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 1)] delay:delay];
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(1, 1)] delay:delay];
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 1)] delay:delay];
         [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 0)] delay:delay];
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 1)] delay:delay];        
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 2)] delay:delay];       
         [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(1, 0)] delay:delay];
-        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 0)] delay:delay];                
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(1, 1)] delay:delay];
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(1, 2)] delay:delay];
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 0)] delay:delay];
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 1)] delay:delay];
+        [robotAnim addFrameWithImage:[robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 2)] delay:delay];                
          
         robotAnim.state = kAnimationState_Running;
         robotAnim.type = kAnimationType_Repeating;
-        
-        aRobotFrame = [robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 1)];
+        [robotSpriteSheet spriteImageAtCoords:CGPointMake(0, 0)].color = Color4fMake(0.0, 0.0, 1.0, 1.0);
+        aRobotFrame = [robotSpriteSheet spriteImageAtCoords:CGPointMake(2, 2)];
+        aRobotFrame.color = Color4fMake(1.0, 0.5, 0.5, 1.0);
 	}
 	return self;
 }
@@ -186,14 +187,14 @@
 
 - (void)renderScene {
 	// Get each image to render itself
-    /*
-	[myImage renderCenteredAtPoint:CGPointMake(160, 240)];
-	[myImage1 renderCenteredAtPoint:CGPointMake(50, 100)];
-	[myImage2 renderCenteredAtPoint:CGPointMake(270, 430)];
+    
+//	[myImage renderCenteredAtPoint:CGPointMake(160, 240)];
+//	[myImage1 renderCenteredAtPoint:CGPointMake(50, 100)];
+//	[myImage2 renderCenteredAtPoint:CGPointMake(270, 430)];
 	
-	[ghostAnim renderCenteredAtPoint:CGPointMake(50, 400)];
-	[playerAnim renderCenteredAtPoint:CGPointMake(270, 75)];
-	*/
+//	[ghostAnim renderCenteredAtPoint:CGPointMake(50, 400)];
+//	[playerAnim renderCenteredAtPoint:CGPointMake(270, 75)];
+	
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
      
