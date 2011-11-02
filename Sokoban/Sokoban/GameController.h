@@ -32,4 +32,7 @@
 // Render the current scene
 - (void)renderCurrentScene;
 
+// Returns an adjusted touch point based on the orientation of the device
+- (CGPoint)adjustTouchOrientationForTouch:(CGPoint)aTouch;
+
 @end

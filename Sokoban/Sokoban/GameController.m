@@ -10,6 +10,9 @@
 #import "GameScene.h"
 #import "Global.h"
 
+
+
+
 #pragma mark -
 #pragma mark Private interface
 
@@ -21,6 +24,12 @@
 // Used as the callback from the accelerometer
 - (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration;
 @end
+
+
+
+
+
+
 
 #pragma mark -
 #pragma mark Public implementation
@@ -57,7 +66,21 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
 	[currentScene renderScene];
 }
 
+// Returns an adjusted touch point based on the orientation of the device
+- (CGPoint)adjustTouchOrientationForTouch:(CGPoint)aTouch {
+    CGPoint returnPoint = aTouch;
+    returnPoint.y = 480 - aTouch.y;
+    return returnPoint;
+}
+
 @end
+
+
+
+
+
+
+
 
 #pragma mark -
 #pragma mark Private implementation
@@ -79,6 +102,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
     
     if(DEBUG) NSLog(@"INFO - GameController: Finished game initialization.");
 }
+
+
+
 
 #pragma mark -
 #pragma mark Accelerometer

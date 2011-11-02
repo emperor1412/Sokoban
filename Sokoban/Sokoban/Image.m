@@ -87,6 +87,7 @@
         // within the texture
         imageSize = texture.contentSize;
 		originalImageSize = imageSize;
+        subImageRectangle = CGRectMake(0, 0, imageSize.width, imageSize.height);
         
         // Get the texture width and height which is to be used.  For an image which is not using
         // a sub region of a texture then these values are the maximum width and height values from

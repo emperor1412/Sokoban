@@ -22,7 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
+    [application setStatusBarHidden:YES];
     [_glView startAnimation];
     [self.window makeKeyAndVisible];
     return YES;

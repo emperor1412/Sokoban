@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-
+#import "AbstractScene.h"
 #import "ESRenderer.h"
 
 @class GameController;

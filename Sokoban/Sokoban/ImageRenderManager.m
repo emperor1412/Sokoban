@@ -115,7 +115,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageRenderManager);
             ivaIndices[vertexCounter++] = index+2;   // Top Left
             ivaIndices[vertexCounter++] = index+1;   // Bottom right
             ivaIndices[vertexCounter++] = index+1;   // Bottom right
-            ivaIndices[vertexCounter++] = index+2;   // Top left
+            ivaIndices[vertexCounter++] = index+2;   // Top leftw
             ivaIndices[vertexCounter++] = index+3;   // Top right
         }
         

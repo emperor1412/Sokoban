@@ -57,6 +57,8 @@
         
         // Grab an instance of the shared game controller
         sharedGameController = [GameController sharedGameController];
+        
+        self.userInteractionEnabled = YES;
     }
 	
     return self;
@@ -187,6 +189,25 @@
     [renderer release];
 	
     [super dealloc];
+}
+
+
+
+#pragma mark - touch handling
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [sharedGameController.currentScene touchesBegan:touches withEvent:event view:self];
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    [sharedGameController.currentScene touchesMoved:touches withEvent:event view:self];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [sharedGameController.currentScene touchesEnded:touches withEvent:event view:self];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [sharedGameController.currentScene touchesCancelled:touches withEvent:event view:self];
 }
 
 @end

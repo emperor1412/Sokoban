@@ -7,6 +7,8 @@
 //
 
 #import "AbstractScene.h"
+#import "GameController.h"
+
 
 @class Image;
 @class ImageRenderManager;
@@ -14,13 +16,32 @@
 @class PackedSpriteSheet;
 @class Animation;
 
+
 @interface GameScene : AbstractScene {
 
 	ImageRenderManager *sharedImageRenderManager;	
+    GameController *sharedGameController;
+    
 	SpriteSheet *spriteSheetCharacter;
+    CGSize characterSpriteSize;
 	Animation *playerAnim;	
     Image *tile;
     Image *tile1;
+    Image *tile2;
+    Image *joypad;
+    
+    CGPoint playerLocation;
+    
+    CGRect glViewBounds;
+    
+    int joypadTouchHash;
+    CGPoint joypadCenter;
+    CGSize joypadRectSize;
+    CGRect joypadBounds;
+    float joypadDistance;
+    float directionOfTravel;
+    
+    BOOL isJoypadTouchMoving;
 }
 
 @end
