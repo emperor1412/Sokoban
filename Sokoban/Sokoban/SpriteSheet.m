@@ -21,6 +21,9 @@
 
 @end
 
+
+
+
 #pragma mark -
 #pragma mark Public implementation
 
@@ -39,7 +42,10 @@
     [super dealloc];
 }
 
+
 static NSMutableDictionary *cachedSpriteSheets = nil;
+
+
 
 + (SpriteSheet*)spriteSheetForImageNamed:(NSString*)aImageName 
                               spriteSize:(CGSize)aSpriteSize
@@ -67,8 +73,11 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 	return [cachedSpriteSheet autorelease];
 }
 
-+ (SpriteSheet*)spriteSheetForImage:(Image*)aImage sheetKey:(NSString*)aSheetKey spriteSize:(CGSize)aSpriteSize 
-							spacing:(NSUInteger)aSpacing margin:(NSUInteger)aMargin {
++ (SpriteSheet*)spriteSheetForImage:(Image*)aImage
+                           sheetKey:(NSString*)aSheetKey
+                         spriteSize:(CGSize)aSpriteSize 
+							spacing:(NSUInteger)aSpacing
+                             margin:(NSUInteger)aMargin {
 	
     // Create a variable that will hold the sprite sheet to return	
 	SpriteSheet *cachedSpriteSheet;
@@ -104,7 +113,10 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 	return NO;
 }
 
-- (id)initWithImageNamed:(NSString*)aImageFileName spriteSize:(CGSize)aSpriteSize spacing:(NSUInteger)aSpacing margin:(NSUInteger)aMargin imageFilter:(GLenum)aFilter {
+- (id)initWithImageNamed:(NSString*)aImageFileName spriteSize:(CGSize)aSpriteSize
+                                                      spacing:(NSUInteger)aSpacing
+                                                       margin:(NSUInteger)aMargin
+                                                  imageFilter:(GLenum)aFilter {
 
     // Call the Image classes designated initializer so that the image we are going to use for the
     // sprite sheet is set up along with all the images properties
@@ -126,7 +138,9 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
     return self;
 }
 
-- (id)initWithImage:(Image*)aImage spriteSize:(CGSize)aSpriteSize spacing:(NSUInteger)aSpacing margin:(NSUInteger)aMargin{
+- (id)initWithImage:(Image*)aImage spriteSize:(CGSize)aSpriteSize
+                                      spacing:(NSUInteger)aSpacing
+                                       margin:(NSUInteger)aMargin {
     if (self = [super init]) {
 		self.image = aImage;
 		
@@ -155,6 +169,9 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 }
 
 @end
+
+
+
 
 @implementation SpriteSheet (Private)
 

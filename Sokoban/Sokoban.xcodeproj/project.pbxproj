@@ -34,6 +34,7 @@
 		5CE9B825145FEA610026F24C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B824145FEA610026F24C /* QuartzCore.framework */; };
 		5CE9B82B146007580026F24C /* RobotSpriteSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */; };
 		5CE9B84E146101AF0026F24C /* joypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B84D146101AF0026F24C /* joypad.png */; };
+		5CE9B854146120910026F24C /* tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B853146120910026F24C /* tile.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		5CE9B824145FEA610026F24C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RobotSpriteSheet2.png; sourceTree = "<group>"; };
 		5CE9B84D146101AF0026F24C /* joypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joypad.png; sourceTree = "<group>"; };
+		5CE9B853146120910026F24C /* tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,6 +274,7 @@
 		5CE9B80D145FE8E70026F24C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5CE9B853146120910026F24C /* tile.png */,
 				5CE9B84D146101AF0026F24C /* joypad.png */,
 				5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */,
 				5CE9B80E145FE8F70026F24C /* coordinates.plist */,
@@ -351,6 +354,7 @@
 				5CE9B815145FE8F70026F24C /* ghost_spritesheet.png in Resources */,
 				5CE9B82B146007580026F24C /* RobotSpriteSheet2.png in Resources */,
 				5CE9B84E146101AF0026F24C /* joypad.png in Resources */,
+				5CE9B854146120910026F24C /* tile.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,9 +49,8 @@ static NSMutableDictionary *cachedPackedSpriteSheets = nil;
 	// If no match is found then we create a new PackedSpriteSheet, add it to the cache and return a reference
 	cachedPackedSpriteSheet = [[PackedSpriteSheet alloc] initWithImageNamed:aImageName controlFile:aControlFile filter:aFilter];
 	[cachedPackedSpriteSheets setObject:cachedPackedSpriteSheet forKey:aImageName];
-	[cachedPackedSpriteSheet release];
 	
-	return cachedPackedSpriteSheet;
+	return [cachedPackedSpriteSheet autorelease];
 }
 
 + (BOOL)removeCachedPackedSpriteSheetWithKey:(NSString*)aKey {

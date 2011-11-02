@@ -16,22 +16,11 @@
 
 @interface GameScene : AbstractScene {
 
-	ImageRenderManager *sharedImageRenderManager;
-
-    Image *myImage;
-	Image *myImage1;
-	Image *myImage2;
-    Image *aRobotFrame;
-    SpriteSheet *robotSpriteSheet;
-	
-	SpriteSheet *spriteSheet;
-	PackedSpriteSheet *packedSpriteSheet;
-	Animation *ghostAnim;
-	Animation *playerAnim;
-	
-    Animation *robotAnim;
-    
-	float scaleAmount;
+	ImageRenderManager *sharedImageRenderManager;	
+	SpriteSheet *spriteSheetCharacter;
+	Animation *playerAnim;	
+    Image *tile;
+    Image *tile1;
 }
 
 @end
