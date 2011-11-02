@@ -156,7 +156,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(ImageRenderManager);
     // Copy the images base texturedColoredQuad into the assigned IVA index.  This is necessary to make sure
 	// the texture and color informaiton is loaded into the IVA.  The geometry from the image is loaded
 	// when the image is transformed within the Image render method.
-    memcpy(aImageDetails->texturedColoredQuadIVA, aImageDetails->texturedColoredQuad,sizeof(TexturedColoredQuad));
+    memcpy(aImageDetails->texturedColoredQuadIVA, aImageDetails->texturedColoredQuad, sizeof(TexturedColoredQuad));
 }
 
 

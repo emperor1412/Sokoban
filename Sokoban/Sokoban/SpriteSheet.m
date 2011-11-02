@@ -64,7 +64,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 	[cachedSpriteSheet release];
 	
     // ... and return a reference to it
-	return cachedSpriteSheet;
+	return [cachedSpriteSheet autorelease];
 }
 
 + (SpriteSheet*)spriteSheetForImage:(Image*)aImage sheetKey:(NSString*)aSheetKey spriteSize:(CGSize)aSpriteSize 
@@ -87,7 +87,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 	[cachedSpriteSheet release];
 	
     // ... and return a reference to it    
-	return cachedSpriteSheet;
+	return [cachedSpriteSheet autorelease];
 	
 }
 

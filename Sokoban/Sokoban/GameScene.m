@@ -69,7 +69,7 @@
 		ghostImages.scale = Scale2fMake(2.0f, 2.0f);
 
 		// Create a sprite sheet using the ghost image we have just obtained
-		SpriteSheet *ghostSprites = [SpriteSheet spriteSheetForImage:ghostImages sheetKey:@"ghostImages" spriteSize:CGSizeMake(40, 40) spacing:0 margin:0];
+		SpriteSheet *ghostSprites = [[SpriteSheet spriteSheetForImage:ghostImages sheetKey:@"ghostImages" spriteSize:CGSizeMake(40, 40) spacing:0 margin:0] retain];
 		
 		// Create a new animation instance
 		ghostAnim = [[Animation alloc] init];
@@ -105,7 +105,7 @@
 		playerImages.rotation = -45.0f;
 		
 		// Create a sprite sheet using the ghost image we have just obtained
-		SpriteSheet *playerSprites = [SpriteSheet spriteSheetForImage:playerImages sheetKey:@"playerSprites" spriteSize:CGSizeMake(40, 40) spacing:0 margin:0];
+		SpriteSheet *playerSprites = [[SpriteSheet spriteSheetForImage:playerImages sheetKey:@"playerSprites" spriteSize:CGSizeMake(40, 40) spacing:0 margin:0] retain];
 		
 		// Create a new animation instance
 		playerAnim = [[Animation alloc] init];
@@ -181,26 +181,23 @@
 	[ghostAnim updateWithDelta:aDelta];
 	[playerAnim updateWithDelta:aDelta];
     
-    [robotAnim updateWithDelta:aDelta];
 }
 
 
 - (void)renderScene {
 	// Get each image to render itself
     
-//	[myImage renderCenteredAtPoint:CGPointMake(160, 240)];
-//	[myImage1 renderCenteredAtPoint:CGPointMake(50, 100)];
-//	[myImage2 renderCenteredAtPoint:CGPointMake(270, 430)];
+	[myImage renderCenteredAtPoint:CGPointMake(160, 240)];
+	[myImage1 renderCenteredAtPoint:CGPointMake(50, 100)];
+	[myImage2 renderCenteredAtPoint:CGPointMake(270, 430)];
 	
-//	[ghostAnim renderCenteredAtPoint:CGPointMake(50, 400)];
-//	[playerAnim renderCenteredAtPoint:CGPointMake(270, 75)];
+	[ghostAnim renderCenteredAtPoint:CGPointMake(50, 400)];
+	[playerAnim renderCenteredAtPoint:CGPointMake(270, 75)];
 	
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
      
     
-    [robotAnim renderCenteredAtPoint:CGPointMake(160, 240) scale:myImage.scale rotation:0.0];
-    [aRobotFrame renderCenteredAtPoint:CGPointMake(50, 100)];
     
 }
 
