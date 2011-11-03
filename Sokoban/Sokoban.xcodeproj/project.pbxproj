@@ -35,6 +35,7 @@
 		5CE9B82B146007580026F24C /* RobotSpriteSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */; };
 		5CE9B84E146101AF0026F24C /* joypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B84D146101AF0026F24C /* joypad.png */; };
 		5CE9B854146120910026F24C /* tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B853146120910026F24C /* tile.png */; };
+		5CE9B85C1462300E0026F24C /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B85B1462300E0026F24C /* Player.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,8 @@
 		5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RobotSpriteSheet2.png; sourceTree = "<group>"; };
 		5CE9B84D146101AF0026F24C /* joypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joypad.png; sourceTree = "<group>"; };
 		5CE9B853146120910026F24C /* tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile.png; sourceTree = "<group>"; };
+		5CE9B85A1462300E0026F24C /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		5CE9B85B1462300E0026F24C /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,7 @@
 				5CE9B7F9145FE7B60026F24C /* Game Engine */,
 				5CE9B7E5145FE6C90026F24C /* Abstract Classes */,
 				5CE9B7E6145FE6CB0026F24C /* Game Controller */,
+				5CE9B85914622FE90026F24C /* Objects and entities */,
 				5CE9B7E7145FE6CD0026F24C /* Game Scenes */,
 				5CE9B7E8145FE6FB0026F24C /* Classes */,
 				5CE9B7BF145FE4C30026F24C /* Supporting Files */,
@@ -296,6 +300,15 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		5CE9B85914622FE90026F24C /* Objects and entities */ = {
+			isa = PBXGroup;
+			children = (
+				5CE9B85A1462300E0026F24C /* Player.h */,
+				5CE9B85B1462300E0026F24C /* Player.m */,
+			);
+			name = "Objects and entities";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -379,6 +392,7 @@
 				5CE9B80B145FE8200026F24C /* Animation.m in Sources */,
 				5CE9B81A145FE9610026F24C /* TextureManager.m in Sources */,
 				5CE9B81D145FE9660026F24C /* ImageRenderManager.m in Sources */,
+				5CE9B85C1462300E0026F24C /* Player.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

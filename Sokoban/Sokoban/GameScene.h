@@ -15,7 +15,7 @@
 @class SpriteSheet;
 @class PackedSpriteSheet;
 @class Animation;
-
+@class Player;
 
 @interface GameScene : AbstractScene {
 
@@ -42,6 +42,8 @@
     float directionOfTravel;
     
     BOOL isJoypadTouchMoving;
+    
+    Player *mainCharacter;
 }
 
 @end

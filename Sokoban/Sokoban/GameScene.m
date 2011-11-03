@@ -13,6 +13,7 @@
 #import "PackedSpriteSheet.h"
 #import "Animation.h"
 #import "AppDelegate.h"
+#import "Player.h"
 
 @implementation GameScene
 
@@ -75,6 +76,9 @@
         
         joypadDistance = 0;
         directionOfTravel = 0;
+        
+        mainCharacter = [[Player alloc] init];
+        mainCharacter.location = CGPointMake(100, 100);
 
 	}
 	return self;
@@ -107,6 +111,8 @@
     
     tile.point = CGPointMake(tile.point.x + 10*aDelta, tile.point.y - 10*aDelta);
     
+    [mainCharacter updateWithDelta:aDelta scene:self];
+    
 }
 
 
@@ -119,6 +125,9 @@
     [tile2 renderCenteredAtPoint:CGPointMake(50, 380)];
 	
     [joypad renderCenteredAtPoint:joypadCenter];
+    
+    [mainCharacter render];
+    
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
 }
