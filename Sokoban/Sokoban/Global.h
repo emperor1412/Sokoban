@@ -9,6 +9,8 @@
 
 #import <OpenGLES/ES1/gl.h>
 #import "Structures.h"
+#import "Constants.h"
+
 
 #pragma mark -
 #pragma mark Debug
@@ -30,6 +32,9 @@
 
 // Macro which converts degrees into radians
 #define DEGREES_TO_RADIANS(__ANGLE__) ((__ANGLE__) / 180.0 * M_PI)
+
+// Macro which converts radians into degrees
+#define RADIANS_TO_DEGREES(__ANGLE__) ((__ANGLE__) * 180.0 / M_PI)
 
 // Macro that allows you to clamp a value within the defined bounds
 #define CLAMP(X, A, B) ((X < A) ? A : ((X > B) ? B : X))

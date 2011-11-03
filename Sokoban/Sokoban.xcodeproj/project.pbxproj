@@ -36,6 +36,14 @@
 		5CE9B84E146101AF0026F24C /* joypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B84D146101AF0026F24C /* joypad.png */; };
 		5CE9B854146120910026F24C /* tile.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B853146120910026F24C /* tile.png */; };
 		5CE9B85C1462300E0026F24C /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B85B1462300E0026F24C /* Player.m */; };
+		5CE9B8761462AEE50026F24C /* Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B8711462AEE50026F24C /* Layer.m */; };
+		5CE9B8771462AEE50026F24C /* TiledMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B8731462AEE50026F24C /* TiledMap.m */; };
+		5CE9B8781462AEE50026F24C /* TileSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B8751462AEE50026F24C /* TileSet.m */; };
+		5CE9B87F1462AF970026F24C /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B87C1462AF970026F24C /* NSDataAdditions.m */; };
+		5CE9B8801462AF970026F24C /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9B87E1462AF970026F24C /* TBXML.m */; };
+		5CE9B8821462AFB60026F24C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B8811462AFB50026F24C /* libz.dylib */; };
+		5CE9B8871462B2480026F24C /* newTileAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B8851462B2470026F24C /* newTileAtlas.png */; };
+		5CE9B88A1462B5400026F24C /* SokobanMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CE9B8891462B5400026F24C /* SokobanMap.tmx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +98,20 @@
 		5CE9B853146120910026F24C /* tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tile.png; sourceTree = "<group>"; };
 		5CE9B85A1462300E0026F24C /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		5CE9B85B1462300E0026F24C /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		5CE9B8701462AEE50026F24C /* Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Layer.h; sourceTree = "<group>"; };
+		5CE9B8711462AEE50026F24C /* Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Layer.m; sourceTree = "<group>"; };
+		5CE9B8721462AEE50026F24C /* TiledMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledMap.h; sourceTree = "<group>"; };
+		5CE9B8731462AEE50026F24C /* TiledMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledMap.m; sourceTree = "<group>"; };
+		5CE9B8741462AEE50026F24C /* TileSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TileSet.h; sourceTree = "<group>"; };
+		5CE9B8751462AEE50026F24C /* TileSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TileSet.m; sourceTree = "<group>"; };
+		5CE9B8791462AF4D0026F24C /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		5CE9B87B1462AF970026F24C /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		5CE9B87C1462AF970026F24C /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
+		5CE9B87D1462AF970026F24C /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		5CE9B87E1462AF970026F24C /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		5CE9B8811462AFB50026F24C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		5CE9B8851462B2470026F24C /* newTileAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newTileAtlas.png; sourceTree = "<group>"; };
+		5CE9B8891462B5400026F24C /* SokobanMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SokobanMap.tmx; path = ../../../SokobanMap.tmx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE9B8821462AFB60026F24C /* libz.dylib in Frameworks */,
 				5CE9B825145FEA610026F24C /* QuartzCore.framework in Frameworks */,
 				5CE9B7D0145FE4E50026F24C /* OpenGLES.framework in Frameworks */,
 				5CE9B7B9145FE4C30026F24C /* UIKit.framework in Frameworks */,
@@ -128,6 +151,7 @@
 		5CE9B7B7145FE4C30026F24C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CE9B8811462AFB50026F24C /* libz.dylib */,
 				5CE9B824145FEA610026F24C /* QuartzCore.framework */,
 				5CE9B7CF145FE4E50026F24C /* OpenGLES.framework */,
 				5CE9B7B8145FE4C30026F24C /* UIKit.framework */,
@@ -140,6 +164,7 @@
 		5CE9B7BE145FE4C30026F24C /* Sokoban */ = {
 			isa = PBXGroup;
 			children = (
+				5CE9B87A1462AF880026F24C /* TBXML */,
 				5CE9B7DF145FE6660026F24C /* Global Header */,
 				5CE9B80C145FE8D10026F24C /* Game Resource */,
 				5CE9B7F9145FE7B60026F24C /* Game Engine */,
@@ -172,6 +197,7 @@
 				5CE9B7E1145FE6760026F24C /* Transform2D.h */,
 				5CE9B7E2145FE6760026F24C /* Structures.h */,
 				5CE9B7E3145FE6760026F24C /* SynthesizeSingleton.h */,
+				5CE9B8791462AF4D0026F24C /* Constants.h */,
 			);
 			name = "Global Header";
 			sourceTree = "<group>";
@@ -229,6 +255,7 @@
 		5CE9B7F9145FE7B60026F24C /* Game Engine */ = {
 			isa = PBXGroup;
 			children = (
+				5CE9B86F1462AED90026F24C /* Tile map */,
 				5CE9B7E4145FE6C60026F24C /* Animation */,
 				5CE9B7FA145FE7C30026F24C /* Sprite Sheet */,
 				5CE9B7FB145FE7D20026F24C /* Image */,
@@ -270,6 +297,7 @@
 		5CE9B80C145FE8D10026F24C /* Game Resource */ = {
 			isa = PBXGroup;
 			children = (
+				5CE9B86A1462AE930026F24C /* Tiled map */,
 				5CE9B80D145FE8E70026F24C /* Images */,
 			);
 			name = "Game Resource";
@@ -307,6 +335,39 @@
 				5CE9B85B1462300E0026F24C /* Player.m */,
 			);
 			name = "Objects and entities";
+			sourceTree = "<group>";
+		};
+		5CE9B86A1462AE930026F24C /* Tiled map */ = {
+			isa = PBXGroup;
+			children = (
+				5CE9B8851462B2470026F24C /* newTileAtlas.png */,
+				5CE9B8891462B5400026F24C /* SokobanMap.tmx */,
+			);
+			name = "Tiled map";
+			sourceTree = "<group>";
+		};
+		5CE9B86F1462AED90026F24C /* Tile map */ = {
+			isa = PBXGroup;
+			children = (
+				5CE9B8701462AEE50026F24C /* Layer.h */,
+				5CE9B8711462AEE50026F24C /* Layer.m */,
+				5CE9B8721462AEE50026F24C /* TiledMap.h */,
+				5CE9B8731462AEE50026F24C /* TiledMap.m */,
+				5CE9B8741462AEE50026F24C /* TileSet.h */,
+				5CE9B8751462AEE50026F24C /* TileSet.m */,
+			);
+			name = "Tile map";
+			sourceTree = "<group>";
+		};
+		5CE9B87A1462AF880026F24C /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				5CE9B87B1462AF970026F24C /* NSDataAdditions.h */,
+				5CE9B87C1462AF970026F24C /* NSDataAdditions.m */,
+				5CE9B87D1462AF970026F24C /* TBXML.h */,
+				5CE9B87E1462AF970026F24C /* TBXML.m */,
+			);
+			name = TBXML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +429,8 @@
 				5CE9B82B146007580026F24C /* RobotSpriteSheet2.png in Resources */,
 				5CE9B84E146101AF0026F24C /* joypad.png in Resources */,
 				5CE9B854146120910026F24C /* tile.png in Resources */,
+				5CE9B8871462B2480026F24C /* newTileAtlas.png in Resources */,
+				5CE9B88A1462B5400026F24C /* SokobanMap.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +456,11 @@
 				5CE9B81A145FE9610026F24C /* TextureManager.m in Sources */,
 				5CE9B81D145FE9660026F24C /* ImageRenderManager.m in Sources */,
 				5CE9B85C1462300E0026F24C /* Player.m in Sources */,
+				5CE9B8761462AEE50026F24C /* Layer.m in Sources */,
+				5CE9B8771462AEE50026F24C /* TiledMap.m in Sources */,
+				5CE9B8781462AEE50026F24C /* TileSet.m in Sources */,
+				5CE9B87F1462AF970026F24C /* NSDataAdditions.m in Sources */,
+				5CE9B8801462AF970026F24C /* TBXML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

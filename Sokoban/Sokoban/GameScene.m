@@ -15,18 +15,22 @@
 #import "AppDelegate.h"
 #import "Player.h"
 
+
+@interface GameScene (Private) 
+
+
+@end
+
+
+
+
 @implementation GameScene
 
 
 #pragma mark - dealloc
 - (void)dealloc {
-
-	[spriteSheetCharacter release];
-	[playerAnim release];
-    [tile release];    
-    [tile1 release];
-    [tile2 release];
     [joypad release];
+    [mainCharacter release];
 	[super dealloc];
 }
 
@@ -37,32 +41,11 @@
 {
 	self = [super init];
 	if (self != nil) {
-        float delay = 0.2f;
+
         glViewBounds = ((AppDelegate *)[UIApplication sharedApplication].delegate).glView.bounds;
         
 		sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
-        sharedGameController = [GameController sharedGameController];
-            
-        characterSpriteSize = CGSizeMake(40, 40);
-        spriteSheetCharacter = [[SpriteSheet spriteSheetForImageNamed:@"player_spritesheet.png"
-                                                           spriteSize:characterSpriteSize
-                                                              spacing:0
-                                                               margin:0
-                                                          imageFilter:GL_LINEAR] retain];
-                
-        playerAnim = [[Animation alloc] init];
-        [playerAnim addFrameWithImage:[spriteSheetCharacter spriteImageAtCoords:CGPointMake(0, 2)] delay:delay];
-        [playerAnim addFrameWithImage:[spriteSheetCharacter spriteImageAtCoords:CGPointMake(1, 2)] delay:delay];
-        [playerAnim addFrameWithImage:[spriteSheetCharacter spriteImageAtCoords:CGPointMake(2, 2)] delay:delay];
-        [playerAnim addFrameWithImage:[spriteSheetCharacter spriteImageAtCoords:CGPointMake(3, 2)] delay:delay];        
-		playerAnim.type = kAnimationType_Repeating;
-        playerAnim.state = kAnimationState_Running;
-        
-        tile = [[Image alloc] initWithImageNamed:@"tile.png" filter:GL_LINEAR];
-        tile.point = CGPointMake(50, 300);
-        
-        tile1 = [[Image alloc] initWithImageNamed:@"tile.png" filter:GL_LINEAR];
-        tile2 = [[tile1 imageDuplicate] retain];
+        sharedGameController = [GameController sharedGameController];                    
                 
         joypad = [[Image alloc] initWithImageNamed:@"joypad.png" filter:GL_LINEAR];        
         joypadCenter = CGPointMake(50, 50);
@@ -71,14 +54,12 @@
 								  joypadCenter.y - joypadRectSize.height, 
 								  joypadRectSize.width * 2, 
 								  joypadRectSize.height * 2);
-        
-        playerLocation = CGPointMake(160, 240);
-        
-        joypadDistance = 0;
-        directionOfTravel = 0;
-        
+            
         mainCharacter = [[Player alloc] init];
-        mainCharacter.location = CGPointMake(100, 100);
+        mainCharacter.location = CGPointMake(160, 240);
+        
+        tiledMap = [[TiledMap alloc] initWithFileName:@"SokobanMap" fileExtension:@"tmx"];
+
 
 	}
 	return self;
@@ -89,27 +70,6 @@
 
 #pragma mark - update logic and redering
 - (void)updateSceneWithDelta:(float)aDelta {	
-
-	[playerAnim updateWithDelta:aDelta];    
-    
-    playerLocation.x -= ((aDelta * (5 * joypadDistance)) * cosf(directionOfTravel));
-    playerLocation.y -= ((aDelta * (5 * joypadDistance)) * sinf(directionOfTravel));
-    
-    if (playerLocation.x < characterSpriteSize.width/2) {
-        playerLocation.x = characterSpriteSize.width/2;
-    }
-    if (playerLocation.x > 320 - characterSpriteSize.width/2) {
-        playerLocation.x = 320 - characterSpriteSize.width/2;
-    }    
-    if (playerLocation.y < characterSpriteSize.height/2) {
-        playerLocation.y = characterSpriteSize.height/2;
-    }
-    if (playerLocation.y > 480 - characterSpriteSize.height/2) {
-        playerLocation.y = 480 - characterSpriteSize.height/2;
-    }
-    
-    
-    tile.point = CGPointMake(tile.point.x + 10*aDelta, tile.point.y - 10*aDelta);
     
     [mainCharacter updateWithDelta:aDelta scene:self];
     
@@ -117,19 +77,22 @@
 
 
 - (void)renderScene {
+
 	
-    [playerAnim renderCenteredAtPoint:playerLocation];
-//    [tile renderCenteredAtPoint:CGPointMake(50, 300)];
-    [tile renderCentered];
-    [tile1 renderCenteredAtPoint:CGPointMake(50, 340)];
-    [tile2 renderCenteredAtPoint:CGPointMake(50, 380)];
-	
-    [joypad renderCenteredAtPoint:joypadCenter];
+    [joypad renderCenteredAtPoint:joypadCenter];    
+    
+//    [tiledMap renderLayer:0 mapx:1 mapy:1 width:8 height:6 useBlending:NO];
+    [tiledMap renderLayer:1 mapx:0 mapy:0 width:9 height:7 useBlending:YES];
+
+    
     
     [mainCharacter render];
     
+
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
+
+
 }
 
 
@@ -155,24 +118,28 @@
         
 		if ([touch hash] == joypadTouchHash && isJoypadTouchMoving) {
 			
-
 			CGPoint originalTouchLocation = [touch locationInView:aView];
-			
+			NSLog(@"originTouch = %@",NSStringFromCGPoint(originalTouchLocation));
 			// As we have the game in landscape mode we need to switch the touches 
 			// x and y coordinates
 			CGPoint touchLocation = [sharedGameController adjustTouchOrientationForTouch:originalTouchLocation];
+            NSLog(@"convertedTouch = %@",NSStringFromCGPoint(touchLocation));
 			
 			// Calculate the angle of the touch from the center of the joypad
-			float dx = (float)joypadCenter.x - (float)touchLocation.x;
-			float dy = (float)joypadCenter.y - (float)touchLocation.y;
+//			float dx = (float)joypadCenter.x - (float)touchLocation.x;
+//			float dy = (float)joypadCenter.y - (float)touchLocation.y;
+            float dx = (float)touchLocation.x - (float)joypadCenter.x;
+            float dy = (float)touchLocation.y - (float)joypadCenter.y;
 			
 			// Calculate the distance from the center of the joypad to the players touch.
 			// Manhatten Distance
-			joypadDistance = fabs(touchLocation.x - joypadCenter.x) + fabs(touchLocation.y - joypadCenter.y);
-			
-			// Calculate the new position of the knight based on the direction of the joypad and how far from the
-			// center the joypad has been moved
-			directionOfTravel = atan2(dy, dx);
+			float distance = fabs(touchLocation.x - joypadCenter.x) + fabs(touchLocation.y - joypadCenter.y);
+			float directionOfTravel = atan2(dy, dx);                    
+            
+            printf("distance = %f   -    angle = %f\n", distance, RADIANS_TO_DEGREES(directionOfTravel));
+            
+            mainCharacter.acceleration = CLAMP(distance/4, 0, 10);
+            mainCharacter.angleOfMovement = directionOfTravel;
 		}
     }
 }
@@ -185,8 +152,9 @@
 		if ([touch hash] == joypadTouchHash) {
 			isJoypadTouchMoving = NO;
 			joypadTouchHash = 0;
-			directionOfTravel = 0;
-			joypadDistance = 0;
+            
+            mainCharacter.acceleration = 0.0;
+            mainCharacter.angleOfMovement = 0.0;
 			return;
 		}
 	}

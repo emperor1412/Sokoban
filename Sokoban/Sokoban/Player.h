@@ -13,26 +13,20 @@
 
 
 @interface Player : NSObject {
-    Animation *leftAnimation;
-    Animation *rightAnimation;
-    Animation *upAnimation;
-    Animation *downAnimation;
-    Animation *currentAnimation;
     
-    SpriteSheet *_spriteSheetPlayer;
-    
+    SpriteSheet *_spriteSheetPlayer;    
     NSString *_spriteSheetImageName;
-    
-    float acceleration;
-    float velocity;
-    float angleOfMovement;
-    
+        
     CGPoint _location;
 }
 
 @property (nonatomic, retain, setter = setSpriteSheetPlayer:) SpriteSheet *spriteSheetPlayer;
 @property (nonatomic, retain, setter = setSpriteSheetImageName:) NSString *spriteSheetImageName;
 @property (nonatomic, assign) CGPoint location;
+
+@property (nonatomic, setter = setAcceleration:) float acceleration;
+@property (nonatomic) float velocity;
+@property (nonatomic, setter = setAngleOfMovement:) float angleOfMovement;
 
 - (void)updateWithDelta:(float)aDelta  scene:(GameScene *)aScene;
 - (id)initWithSpriteSheetImageNamed:(NSString *)fileName;
