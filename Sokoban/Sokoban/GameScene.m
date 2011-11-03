@@ -37,8 +37,7 @@
 
 
 #pragma mark - init
-- (id) init
-{
+- (id)init {
 	self = [super init];
 	if (self != nil) {
 
@@ -59,6 +58,7 @@
         mainCharacter.location = CGPointMake(160, 240);
         
         tiledMap = [[TiledMap alloc] initWithFileName:@"SokobanMap" fileExtension:@"tmx"];
+        NSLog(@"layer's count = %d",[tiledMap.layers count]);
 
 
 	}
@@ -75,20 +75,13 @@
     
 }
 
-
 - (void)renderScene {
+	        
+    [tiledMap renderLayer:0 mapx:0 mapy:0 width:9 height:12 useBlending:NO];        
 
-	
     [joypad renderCenteredAtPoint:joypadCenter];    
-    
-//    [tiledMap renderLayer:0 mapx:1 mapy:1 width:8 height:6 useBlending:NO];
-    [tiledMap renderLayer:1 mapx:0 mapy:0 width:9 height:7 useBlending:YES];
-
-    
-    
     [mainCharacter render];
     
-
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
 

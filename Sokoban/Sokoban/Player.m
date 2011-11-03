@@ -185,7 +185,7 @@
         [currentAnimation updateWithDelta:aDelta];
         
         _velocity += _acceleration;
-        _velocity = CLAMP(_velocity, 0.5, 20);
+        _velocity = CLAMP(_velocity, 0.5, 15);
     }
 }
 
