@@ -10,6 +10,11 @@
 #import "GameController.h"
 #import "TiledMap.h"
 
+
+#define kMapWidth 8
+#define kMapHeight 12
+
+
 @class Image;
 @class ImageRenderManager;
 @class SpriteSheet;
@@ -26,17 +31,23 @@
     
     Image *joypad;
     Player *mainCharacter;    
-        TiledMap *tiledMap;
+    TiledMap *tiledMap;
     
-    CGRect glViewBounds;
+    CGRect glViewBounds;    
     
     int joypadTouchHash;
     CGPoint joypadCenter;
     CGSize joypadRectSize;
     CGRect joypadBounds;    
     BOOL isJoypadTouchMoving;
+    BOOL blockers[kMapWidth][kMapHeight];
     
-
+@public
+    NSMutableArray *rocks;
+    
 }
+
+- (BOOL)isBlocked:(float)x y:(float)y;
+
 
 @end

@@ -7,13 +7,15 @@
 //
 
 #import "Player.h"
-
+#import "Rock.h"
+#import "Primitives.h"
 
 
 @interface Player(Private)
-- (void)updateLocationWithDelta:(float)aDelta;
+- (void)updateLocationWithDelta:(float)aDelta scene:(GameScene*)aScene;
 - (void)populateSpriteToAnimations;
 - (void)setUpPlayer;
+BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize);
 @end
 
 
@@ -81,12 +83,25 @@
 
 #pragma mark - player update logic and rendering
 - (void)updateWithDelta:(float)aDelta scene:(GameScene *)aScene {
-    [self updateLocationWithDelta:aDelta];
+    [self updateLocationWithDelta:aDelta scene:aScene];
 }
 
 - (void)render {
     [currentAnimation renderCenteredAtPoint:_location];
 }
+
+
+
+
+#pragma mark - get bounds
+ - (CGRect)movementBounds {
+    return CGRectMake(_location.x - 12, _location.y - 18, 24, 36);
+}
+
+- (CGRect)collisionBounds {
+    return CGRectMake(_location.x - 15, _location.y - 18, 30, 36);    
+}
+
 
 
 
@@ -119,6 +134,25 @@
 }
 
 - (void)setAngleOfMovement:(float)angleOfMovement {
+    
+    /*
+    float angleToMove = 0.0;
+    if (angleOfMovement >= -3*M_PI_4 && angleOfMovement < -M_PI_4) {     
+        angleToMove = M_PI_2;
+        
+    } else if (angleOfMovement >= M_PI_4 && angleOfMovement < 3*M_PI_4) {
+        angleToMove = 3*M_PI_2;
+     
+        
+    } else if (angleOfMovement >= -M_PI_4 && angleOfMovement < M_PI_4) {
+        angleToMove = M_PI;
+     
+        
+    } else  {
+        angleToMove = 0.0;
+     
+    }
+    */
     _angleOfMovement = angleOfMovement;
 }
 
@@ -130,7 +164,30 @@
 
 @implementation Player(Private)
 
-- (void)updateLocationWithDelta:(float)aDelta {
+BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize) {
+	
+	BoundingBoxTileQuad bbtq;
+	
+	// Bottom left
+	bbtq.x1 = (int)(aRect.origin.x / aTileSize.width);
+	bbtq.y1 = (int)(aRect.origin.y / aTileSize.height);
+	
+	// Bottom right
+	bbtq.x2 = (int)((aRect.origin.x + aRect.size.width) / aTileSize.width);
+	bbtq.y2 = bbtq.y1;
+	
+	// Top right
+	bbtq.x3 = bbtq.x2;
+    bbtq.y3 = (int)((aRect.origin.y + aRect.size.height) / aTileSize.height);
+	
+	// Top left
+	bbtq.x4 = bbtq.x1;
+	bbtq.y4 = bbtq.y3;
+	
+	return bbtq;
+}
+
+- (void)updateLocationWithDelta:(float)aDelta scene:(GameScene *)aScene{
     if (_acceleration == 0) {
         currentAnimation.state = kAnimationState_Stopped;
         currentAnimation.currentFrame = 0;
@@ -138,9 +195,9 @@
     }
     else {
         CGPoint oldPosition = _location;
-        
-        
+                
         float angleToMove = 0.0;
+
         
         if (_angleOfMovement >= -3*M_PI_4 && _angleOfMovement < -M_PI_4) {
 			currentAnimation = downAnimation;
@@ -159,27 +216,47 @@
 			currentAnimation = leftAnimation;
 		}
         
-        
         float diff = ((aDelta * (_velocity * _acceleration)) * cosf(angleToMove));
+        diff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
 //        printf("velo = %f   -   accel = %f  -   angle = %f  -   diff-x = %f  -    ", _velocity, _acceleration, angleToMove, diff);
         _location.x -= diff;
-        if (_location.x < 20) {
+
+        CGRect movementBounds = [self movementBounds];
+        BoundingBoxTileQuad bbtq = getTileCoordsForBoundingRect(movementBounds, CGSizeMake(kTile_Width, kTile_Height));
+        // check collision with bounding box
+        if ([aScene isBlocked:bbtq.x1 y:bbtq.y1] ||
+            [aScene isBlocked:bbtq.x2 y:bbtq.y2] || 
+            [aScene isBlocked:bbtq.x3 y:bbtq.y3] ||
+            [aScene isBlocked:bbtq.x4 y:bbtq.y4]) {
             _location.x = oldPosition.x;
         }
-        if (_location.x > 320 - 20) {
-            _location.x = oldPosition.x;
-        }    
         
-        diff = ((aDelta * (_velocity * _acceleration)) * sinf(angleToMove));
+        
+        diff = ((aDelta * (_velocity * _acceleration)) * sinf( angleToMove));
+        diff = 1.0 * sinf( angleToMove);        // constant velocity, remove this line to have versatile velocity
 //        printf("diff-y = %f\n",diff);
         _location.y -= diff;
         
-        if (_location.y < 20) {
+        movementBounds = [self movementBounds];
+        bbtq = getTileCoordsForBoundingRect(movementBounds, CGSizeMake(kTile_Width, kTile_Height));
+        // check collision with bounding box
+        if ([aScene isBlocked:bbtq.x1 y:bbtq.y1] ||
+            [aScene isBlocked:bbtq.x2 y:bbtq.y2] || 
+            [aScene isBlocked:bbtq.x3 y:bbtq.y3] ||
+            [aScene isBlocked:bbtq.x4 y:bbtq.y4]) {
             _location.y = oldPosition.y;
         }
-        if (_location.y > 480 - 20) {
-            _location.y = oldPosition.y;
-        }                    
+        
+        
+        // check collision with rocks
+        NSMutableArray *rocks = aScene->rocks;
+        for (Rock *rock in rocks) {
+
+            if (CGRectIntersectsRect([self collisionBounds], [rock collisionBoundsForAngle:angleToMove])) {
+                NSLog(@"Collision");
+            }
+        }
+        
         
         currentAnimation.state = kAnimationState_Running;
         [currentAnimation updateWithDelta:aDelta];

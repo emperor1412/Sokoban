@@ -43,6 +43,13 @@ typedef struct {
     TexturedColoredVertex vertex4;
 } TexturedColoredQuad;
 
+typedef struct {
+	float x1, y1;
+	float x2, y2;
+	float x3, y3;
+	float x4, y4;
+} BoundingBoxTileQuad;
+
 // Stores information about each image which is created.  texturedColoredQuad
 // holds the original zero origin quad for the image and the texturedColoredQuadIVA
 // holds a pointer to the images entry within the IVA

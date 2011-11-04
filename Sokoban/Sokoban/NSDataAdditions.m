@@ -221,8 +221,7 @@ static char encodingTable[64] = {
 #pragma mark -
 #pragma mark GZIP
 
-- (NSData *)gzipDeflate
-{
+- (NSData *)gzipDeflate {
 	if ([self length] == 0) return self;
 	
 	z_stream strm;
@@ -262,8 +261,7 @@ static char encodingTable[64] = {
 	return [NSData dataWithData:compressed];
 }
 
-- (NSData *)gzipInflate
-{
+- (NSData *)gzipInflate {
 	if ([self length] == 0) return self;
 	
 	unsigned full_length = [self length];

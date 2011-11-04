@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		278CB0751463059C003931A8 /* SokobanMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 278CB0741463059C003931A8 /* SokobanMap.tmx */; };
+		5CA9785B1463E8800018154E /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA9785A1463E8800018154E /* rock.png */; };
+		5CA9785F1463F1E30018154E /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA9785E1463F1E30018154E /* Rock.m */; };
+		5CA978621463F8C90018154E /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA978611463F8C90018154E /* Primitives.m */; };
 		5CE9B7B9145FE4C30026F24C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B7B8145FE4C30026F24C /* UIKit.framework */; };
 		5CE9B7BB145FE4C30026F24C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B7BA145FE4C30026F24C /* Foundation.framework */; };
 		5CE9B7BD145FE4C30026F24C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B7BC145FE4C30026F24C /* CoreGraphics.framework */; };
@@ -48,6 +51,11 @@
 
 /* Begin PBXFileReference section */
 		278CB0741463059C003931A8 /* SokobanMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SokobanMap.tmx; sourceTree = "<group>"; };
+		5CA9785A1463E8800018154E /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
+		5CA9785D1463F1E30018154E /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
+		5CA9785E1463F1E30018154E /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
+		5CA978601463F8C90018154E /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitives.h; sourceTree = "<group>"; };
+		5CA978611463F8C90018154E /* Primitives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitives.m; sourceTree = "<group>"; };
 		5CE9B7B4145FE4C30026F24C /* Sokoban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sokoban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE9B7B8145FE4C30026F24C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5CE9B7BA145FE4C30026F24C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -255,6 +263,8 @@
 		5CE9B7F9145FE7B60026F24C /* Game Engine */ = {
 			isa = PBXGroup;
 			children = (
+				5CA978601463F8C90018154E /* Primitives.h */,
+				5CA978611463F8C90018154E /* Primitives.m */,
 				5CE9B86F1462AED90026F24C /* Tile map */,
 				5CE9B7E4145FE6C60026F24C /* Animation */,
 				5CE9B7FA145FE7C30026F24C /* Sprite Sheet */,
@@ -306,6 +316,7 @@
 		5CE9B80D145FE8E70026F24C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5CA9785A1463E8800018154E /* rock.png */,
 				5CE9B853146120910026F24C /* tile.png */,
 				5CE9B84D146101AF0026F24C /* joypad.png */,
 				5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */,
@@ -333,6 +344,8 @@
 			children = (
 				5CE9B85A1462300E0026F24C /* Player.h */,
 				5CE9B85B1462300E0026F24C /* Player.m */,
+				5CA9785D1463F1E30018154E /* Rock.h */,
+				5CA9785E1463F1E30018154E /* Rock.m */,
 			);
 			name = "Objects and entities";
 			sourceTree = "<group>";
@@ -431,6 +444,7 @@
 				5CE9B854146120910026F24C /* tile.png in Resources */,
 				5CE9B8871462B2480026F24C /* newTileAtlas 2.png in Resources */,
 				278CB0751463059C003931A8 /* SokobanMap.tmx in Resources */,
+				5CA9785B1463E8800018154E /* rock.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +475,8 @@
 				5CE9B8781462AEE50026F24C /* TileSet.m in Sources */,
 				5CE9B87F1462AF970026F24C /* NSDataAdditions.m in Sources */,
 				5CE9B8801462AF970026F24C /* TBXML.m in Sources */,
+				5CA9785F1463F1E30018154E /* Rock.m in Sources */,
+				5CA978621463F8C90018154E /* Primitives.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

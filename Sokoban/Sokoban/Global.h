@@ -16,7 +16,8 @@
 #pragma mark Debug
 
 #define SLQLOG(...) NSLog(__VA_ARGS__);
-//#define SLQLOG(...)
+
+#define DLog(...) NSLog(@"%s %@", __PRETTY_FUNCTION__, [NSString stringWithFormat:__VA_ARGS__])
 
 #define DEBUG 1
 #define SCB 0

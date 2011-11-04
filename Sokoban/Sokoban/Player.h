@@ -28,6 +28,9 @@
 @property (nonatomic) float velocity;
 @property (nonatomic, setter = setAngleOfMovement:) float angleOfMovement;
 
+
+- (CGRect)movementBounds;
+- (CGRect)collisionBounds;
 - (void)updateWithDelta:(float)aDelta  scene:(GameScene *)aScene;
 - (id)initWithSpriteSheetImageNamed:(NSString *)fileName;
 
