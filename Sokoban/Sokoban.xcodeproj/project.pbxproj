@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		278CB0731462CCD0003931A8 /* SokobanMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 278CB0721462CCD0003931A8 /* SokobanMap.tmx */; };
+		278CB0751463059C003931A8 /* SokobanMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 278CB0741463059C003931A8 /* SokobanMap.tmx */; };
 		5CE9B7B9145FE4C30026F24C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B7B8145FE4C30026F24C /* UIKit.framework */; };
 		5CE9B7BB145FE4C30026F24C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B7BA145FE4C30026F24C /* Foundation.framework */; };
 		5CE9B7BD145FE4C30026F24C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CE9B7BC145FE4C30026F24C /* CoreGraphics.framework */; };
@@ -47,7 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		278CB0721462CCD0003931A8 /* SokobanMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = SokobanMap.tmx; path = ../../../SokobanMap.tmx; sourceTree = "<group>"; };
+		278CB0741463059C003931A8 /* SokobanMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SokobanMap.tmx; sourceTree = "<group>"; };
 		5CE9B7B4145FE4C30026F24C /* Sokoban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sokoban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CE9B7B8145FE4C30026F24C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5CE9B7BA145FE4C30026F24C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -341,7 +341,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE9B8851462B2470026F24C /* newTileAtlas 2.png */,
-				278CB0721462CCD0003931A8 /* SokobanMap.tmx */,
+				278CB0741463059C003931A8 /* SokobanMap.tmx */,
 			);
 			name = "Tiled map";
 			sourceTree = "<group>";
@@ -430,7 +430,7 @@
 				5CE9B84E146101AF0026F24C /* joypad.png in Resources */,
 				5CE9B854146120910026F24C /* tile.png in Resources */,
 				5CE9B8871462B2480026F24C /* newTileAtlas 2.png in Resources */,
-				278CB0731462CCD0003931A8 /* SokobanMap.tmx in Resources */,
+				278CB0751463059C003931A8 /* SokobanMap.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

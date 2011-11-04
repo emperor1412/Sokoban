@@ -71,21 +71,17 @@
 #pragma mark - update logic and redering
 - (void)updateSceneWithDelta:(float)aDelta {	
     
-    [mainCharacter updateWithDelta:aDelta scene:self];
-    
+    [mainCharacter updateWithDelta:aDelta scene:self];    
 }
 
 - (void)renderScene {
 	        
     [tiledMap renderLayer:0 mapx:0 mapy:0 width:9 height:12 useBlending:NO];        
-
-    [joypad renderCenteredAtPoint:joypadCenter];    
     [mainCharacter render];
+    [joypad renderCenteredAtPoint:joypadCenter];    
     
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
-
-
 }
 
 
@@ -100,8 +96,7 @@
         if (CGRectContainsPoint(joypadBounds, location)) {
             joypadTouchHash = [touch hash];
             isJoypadTouchMoving = YES;
-        }
-        
+        }        
     }
 }
 

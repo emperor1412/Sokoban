@@ -120,7 +120,6 @@
 
 - (void)setAngleOfMovement:(float)angleOfMovement {
     _angleOfMovement = angleOfMovement;
-
 }
 
 @end
@@ -140,7 +139,8 @@
     else {
         CGPoint oldPosition = _location;
         
-        float angleToMove = 0.0f;
+        
+        float angleToMove = 0.0;
         
         if (_angleOfMovement >= -3*M_PI_4 && _angleOfMovement < -M_PI_4) {
 			currentAnimation = downAnimation;
@@ -190,6 +190,7 @@
 }
 
 - (void)populateSpriteToAnimations {
+    
     float delay = 0.1f;
     self.leftAnimation = [[Animation alloc] init];
     self.rightAnimation = [[Animation alloc] init];
