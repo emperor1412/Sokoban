@@ -67,7 +67,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
     cachedSpriteSheet = [[SpriteSheet alloc] initWithImageNamed:aImageName spriteSize:aSpriteSize spacing:aSpacing margin:aMargin imageFilter:aFilter];
     // ... add it to the cachedSpriteSheets dictionary
 	[cachedSpriteSheets setObject:cachedSpriteSheet forKey:aImageName];
-	[cachedSpriteSheet release];
+//	[cachedSpriteSheet release];
 	
     // ... and return a reference to it
 	return [cachedSpriteSheet autorelease];
@@ -93,7 +93,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 	cachedSpriteSheet = [[SpriteSheet alloc] initWithImage:aImage spriteSize:aSpriteSize spacing:aSpacing margin:aMargin];
     // ... add it to the cachedSpriteSheets dictionary
 	[cachedSpriteSheets setObject:cachedSpriteSheet forKey:aSheetKey];
-	[cachedSpriteSheet release];
+//	[cachedSpriteSheet release];
 	
     // ... and return a reference to it    
 	return [cachedSpriteSheet autorelease];
@@ -125,7 +125,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
         NSString *fileName = [aImageFileName lastPathComponent];
         
         // Initialize the image to be used for this sprite sheet
-		self.image = [[Image alloc] initWithImageNamed:fileName filter:aFilter];
+		self.image = [[[Image alloc] initWithImageNamed:fileName filter:aFilter] autorelease];
 
 		// Sprite size and spacing
 		spriteSize = aSpriteSize;

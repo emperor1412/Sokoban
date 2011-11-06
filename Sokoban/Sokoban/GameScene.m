@@ -18,7 +18,9 @@
 #import "Primitives.h"
 
 
-
+@interface GameScene(Private)    
+BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize);
+@end
 
 
 @implementation GameScene
@@ -92,6 +94,10 @@
         }
         
         NSLog(@"tileSet's last object : %@",[tiledMap.tileSets lastObject]);
+        
+        mainCharacter.velocity = 0.5;
+        mainCharacter.acceleration = 0.0;
+        mainCharacter.angleOfMovement = 0.0;
 
 	}
 	return self;
@@ -103,14 +109,88 @@
 #pragma mark - update logic and redering
 - (void)updateSceneWithDelta:(float)aDelta {	
     
-    [mainCharacter updateWithDelta:aDelta scene:self];  
+    [self updatePlayerLocationWithDelta:aDelta];
+//    [mainCharacter updateWithDelta:aDelta scene:self];  
 //    DLog(@"position : %@",NSStringFromCGPoint(mainCharacter.location));
+}
+
+- (void)updatePlayerLocationWithDelta:(float)aDelta {
+    if (mainCharacter.acceleration == 0) {
+        mainCharacter.currentAnimation.state = kAnimationState_Stopped;
+        mainCharacter.currentAnimation.currentFrame = 0;
+        mainCharacter.velocity = 0.5;
+    }
+    else {
+        CGPoint oldPosition = mainCharacter.location;        
+        float angleToMove = 0.0;
+                
+        if (mainCharacter.angleOfMovement >= -3*M_PI_4 && mainCharacter.angleOfMovement < -M_PI_4) {
+			mainCharacter.currentAnimation = mainCharacter.downAnimation;
+            angleToMove = M_PI_2;
+            
+		} else if (mainCharacter.angleOfMovement >= M_PI_4 && mainCharacter.angleOfMovement < 3*M_PI_4) {
+            angleToMove = 3*M_PI_2;
+			mainCharacter.currentAnimation = mainCharacter.upAnimation;
+            
+		} else if (mainCharacter.angleOfMovement >= -M_PI_4 && mainCharacter.angleOfMovement < M_PI_4) {
+            angleToMove = M_PI;
+			mainCharacter.currentAnimation = mainCharacter.rightAnimation;
+            
+		} else  {
+            angleToMove = 0.0;
+			mainCharacter.currentAnimation = mainCharacter.leftAnimation;
+		}
+        
+        float diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * cosf(angleToMove));
+        diff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
+        //        printf("velo = %f   -   accel = %f  -   angle = %f  -   diff-x = %f  -    ", mainCharacter.velocity, mainCharacter.acceleration, angleToMove, diff);
+        mainCharacter->_location.x -= diff;
+        
+        CGRect movementBounds = [mainCharacter movementBounds];
+        BoundingBoxTileQuad bbtq = getTileCoordsForBoundingRect(movementBounds, CGSizeMake(kTile_Width, kTile_Height));
+        // check collision with bounding box
+        if ([self isBlocked:bbtq.x1 y:bbtq.y1] ||
+            [self isBlocked:bbtq.x2 y:bbtq.y2] || 
+            [self isBlocked:bbtq.x3 y:bbtq.y3] ||
+            [self isBlocked:bbtq.x4 y:bbtq.y4]) {
+            mainCharacter->_location.x = oldPosition.x;
+        }
+                
+        diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * sinf( angleToMove));
+        diff = 1.0 * sinf( angleToMove);        // constant velocity, remove this line to have versatile velocity
+        //        printf("diff-y = %f\n",diff);
+        
+        mainCharacter->_location.y -= diff;
+        
+        movementBounds = [mainCharacter movementBounds];
+        bbtq = getTileCoordsForBoundingRect(movementBounds, CGSizeMake(kTile_Width, kTile_Height));
+        // check collision with bounding box
+        if ([self isBlocked:bbtq.x1 y:bbtq.y1] ||
+            [self isBlocked:bbtq.x2 y:bbtq.y2] || 
+            [self isBlocked:bbtq.x3 y:bbtq.y3] ||
+            [self isBlocked:bbtq.x4 y:bbtq.y4]) {
+            mainCharacter->_location.y = oldPosition.y;
+        }
+        
+        // check collision with rocks
+        for (Rock *rock in rocks) {
+            
+            if (CGRectIntersectsRect([mainCharacter collisionBounds], [rock collisionBoundsForAngle:angleToMove])) {
+                NSLog(@"Collision");
+            }
+        }
+                        
+        mainCharacter.currentAnimation.state = kAnimationState_Running;
+        [mainCharacter.currentAnimation updateWithDelta:aDelta];
+        
+        mainCharacter.velocity += mainCharacter.acceleration;
+        mainCharacter.velocity = CLAMP(mainCharacter.velocity, 0.5, 15);
+}
 }
 
 - (void)renderScene {
 	        
     [tiledMap renderLayer:0 mapx:0 mapy:0 width:kMapWidth height:kMapHeight useBlending:NO];        
-//    [tiledMap renderLayer:1 mapx:0 mapy:0 width:9 height:12 useBlending:YES];        
     [mainCharacter render];
     
     for (Rock *rock in rocks) {
@@ -118,8 +198,6 @@
     }
     
     [joypad renderCenteredAtPoint:joypadCenter];    
-
-//    drawRect([Player collisionBoundsForAngle:angleToMove]);
     
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
@@ -127,6 +205,33 @@
     for (Rock *rock in rocks) {
         drawRect([rock movementBounds]);
     }
+}
+
+
+
+
+#pragma mark - other methods
+BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize) {
+    
+    BoundingBoxTileQuad bbtq;
+    
+    // Bottom left
+    bbtq.x1 = (int)(aRect.origin.x / aTileSize.width);
+    bbtq.y1 = (int)(aRect.origin.y / aTileSize.height);
+    
+    // Bottom right
+    bbtq.x2 = (int)((aRect.origin.x + aRect.size.width) / aTileSize.width);
+    bbtq.y2 = bbtq.y1;
+    
+    // Top right
+    bbtq.x3 = bbtq.x2;
+    bbtq.y3 = (int)((aRect.origin.y + aRect.size.height) / aTileSize.height);
+    
+    // Top left
+    bbtq.x4 = bbtq.x1;
+    bbtq.y4 = bbtq.y3;
+    
+    return bbtq;
 }
 
 
@@ -141,6 +246,7 @@
 		return YES;
 	}
 	
+    
 	// Return the blocked status of the specified tile
     return blockers[(int)x][(int)y];
 }
@@ -165,7 +271,7 @@
 			float distance = fabs(touchLocation.x - joypadCenter.x) + fabs(touchLocation.y - joypadCenter.y);
 			float directionOfTravel = atan2(dy, dx);                    
             
-            //            printf("distance = %f   -    angle = %f\n", distance, RADIANS_TO_DEGREES(directionOfTravel));
+            // printf("distance = %f   -    angle = %f\n", distance, RADIANS_TO_DEGREES(directionOfTravel));
             
             mainCharacter.acceleration = CLAMP(distance/4, 0, 10);
             mainCharacter.angleOfMovement = directionOfTravel;

@@ -91,12 +91,14 @@
 	// back control when done.  This makes sure we get touch events registered correctly
 	while(CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.004f, false) == kCFRunLoopRunHandledSource);
 	
+//    int count = 0;
 	while (updateIterations >= UPDATE_INTERVAL) {
 		updateIterations -= UPDATE_INTERVAL;
-		
+//		++count;
 		// Update the game logic passing in the fixed update interval as the delta
 		[sharedGameController updateCurrentSceneWithDelta:UPDATE_INTERVAL];		
 	}
+//    printf("count = %i",count);
 	
 	cyclesLeftOver = updateIterations;
 	lastFrameTime = currentTime;
@@ -156,7 +158,11 @@
 			[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
 		}
 		else
-			animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) target:self selector:@selector(gameLoop) userInfo:nil repeats:TRUE];
+			animationTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)((1.0 / 60.0) * animationFrameInterval) 
+                                                              target:self
+                                                            selector:@selector(gameLoop)
+                                                            userInfo:nil
+                                                             repeats:TRUE];
 		
 		animating = TRUE;
 		
