@@ -253,6 +253,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 
 
 
+
 #pragma mark - touch handling
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event view:(UIView *)aView {
     for (UITouch *touch in touches) {
