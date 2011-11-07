@@ -46,7 +46,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 	if (self != nil) {
         rocks = [[NSMutableArray alloc] init];
 
-        glViewBounds = ((AppDelegate *)[UIApplication sharedApplication].delegate).glView.bounds;
+//        glViewBounds = ((AppDelegate *)[UIApplication sharedApplication].delegate).glViewController.view.bounds;
         
 		sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         sharedGameController = [GameController sharedGameController];                    
@@ -132,27 +132,6 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 #pragma mark - update logic and redering
 - (void)updateSceneWithDelta:(float)aDelta {	
     
-    int xTile, yTile, count = 0;
-    for (Rock *rock in rocks) {
-        xTile = (rock.location.x + kTile_Width/2) / kTile_Width - 1;
-        yTile = (rock.location.y + kTile_Height/2) / kTile_Height - 1;
-        if (finishCondition[xTile][yTile]) {
-            ++count;
-        }
-    }
-    
-    if (count == [rocks count]) {
-        NSLog(@"Finish Game");
-        [((AppDelegate *)[UIApplication sharedApplication].delegate).glView stopAnimation];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"You Win"
-                                                        message:@""
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        [alert release];
-        return;
-    }
     
     [self updatePlayerLocationWithDelta:aDelta];
     //    [mainCharacter updateWithDelta:aDelta scene:self];  
@@ -164,6 +143,31 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         mainCharacter.currentAnimation.state = kAnimationState_Stopped;
         mainCharacter.currentAnimation.currentFrame = 0;
         mainCharacter.velocity = 0.5;
+        
+        int xTile, yTile, count = 0;
+        for (Rock *rock in rocks) {
+            xTile = rock.location.x  / kTile_Width;
+            yTile = rock.location.y  / kTile_Height;
+            //        NSLog(@"xTile : %d  -   yTile : %d", xTile, yTile);
+            if (finishCondition[xTile][yTile]) {
+                ++count;
+            }
+            //        NSLog(@"xTile : %d  -   yTile : %d      -   count = %d", xTile, yTile, count);
+        }
+        
+        if (count == [rocks count]) {
+            NSLog(@"Finish Game");
+            [((AppDelegate *)[UIApplication sharedApplication].delegate).glViewController stopAnimation];
+            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"You Win"
+                                                             message:@""
+                                                            delegate:nil
+                                                   cancelButtonTitle:@"OK"
+                                                   otherButtonTitles:nil] autorelease];
+            [alert performSelector:@selector(show) withObject:nil afterDelay:0.5];
+            
+            return;
+        }
+
     }
     else {
         
@@ -188,7 +192,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 		}
         
         mainCharacter.currentAnimation.state = kAnimationState_Running;
-        [mainCharacter.currentAnimation updateWithDelta:aDelta];
+        [mainCharacter.currentAnimation updateWithDelta:aDelta];4
         
 //        float diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * cosf(angleToMove));
         float xDiff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
@@ -229,9 +233,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         for (Rock *rock in rocks) {
             rockCollisionBounds[i] = [rock collisionBounds];
             if (CGRectIntersectsRect(characterCollisionBounds, rockCollisionBounds[i])) {
-                NSLog(@"Collision");
+//                NSLog(@"Collision");
                 if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds)) {   // the character collides with one of the rocks
-                    NSLog(@"Move the rock");
+//                    NSLog(@"Move the rock");
                     CGPoint oldRockPosition = rock.location;
                     
                     rock->_location.x -= xDiff;

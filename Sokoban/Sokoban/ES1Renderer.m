@@ -15,6 +15,8 @@
 @interface ES1Renderer (Private)
 // Initialize OpenGL
 - (void)initOpenGL;
+- (void)createFrameBufferWithLayer:(CAEAGLLayer *)layer;
+- (void)deleteFrameBuffer;
 @end
 
 #pragma mark -
@@ -35,14 +37,17 @@
         }
 		
 		// Create default framebuffer object. The backing will be allocated for the current layer in -resizeFromLayer
-		glGenFramebuffersOES(1, &defaultFramebuffer);
-		glGenRenderbuffersOES(1, &colorRenderbuffer);
-		glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
-		glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
-		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+//		glGenFramebuffersOES(1, &defaultFramebuffer);
+//		glGenRenderbuffersOES(1, &colorRenderbuffer);
+//		glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
+//		glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
+//		glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+        
         
         // Grab a reference to the shared game controller
         sharedGameController = [GameController sharedGameController];
+        
+        
 	}
 	
 	return self;
@@ -62,18 +67,22 @@
 
 - (BOOL) resizeFromLayer:(CAEAGLLayer *)layer {	
 	// Allocate color buffer backing based on the current layer size
-    glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
-    [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
-	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
-    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
-	
-    if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
-	{
-		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
-        return NO;
-    }
+//    glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
+//    [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
+//	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
+//    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
+//	
+//    if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
+//	{
+//		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+//        return NO;
+//    }
     
 	// Initialize OpenGL now that the necessary buffers have been created and bound
+    
+    [EAGLContext setCurrentContext:context];
+    [self deleteFrameBuffer];
+    [self createFrameBufferWithLayer:layer];
 	[self initOpenGL];
 	
     return YES;
@@ -148,6 +157,41 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     glEnable(GL_BLEND);
+}
+
+- (void)createFrameBufferWithLayer:(CAEAGLLayer *)layer {
+    glGenFramebuffersOES(1, &defaultFramebuffer);
+    glGenRenderbuffersOES(1, &colorRenderbuffer);
+    glBindFramebufferOES(GL_FRAMEBUFFER_OES, defaultFramebuffer);
+    glBindRenderbufferOES(GL_RENDERBUFFER_OES, colorRenderbuffer);
+    
+    [context renderbufferStorage:GL_RENDERBUFFER_OES fromDrawable:layer];
+    
+    glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_COLOR_ATTACHMENT0_OES, GL_RENDERBUFFER_OES, colorRenderbuffer);
+    
+	glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_WIDTH_OES, &backingWidth);
+    glGetRenderbufferParameterivOES(GL_RENDERBUFFER_OES, GL_RENDERBUFFER_HEIGHT_OES, &backingHeight);
+	
+    if (glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES)
+	{
+		NSLog(@"Failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
+        return;
+    }
+    
+}
+
+- (void)deleteFrameBuffer {
+    if (defaultFramebuffer)
+	{
+		glDeleteFramebuffersOES(1, &defaultFramebuffer);
+		defaultFramebuffer = 0;
+	}
+    
+	if (colorRenderbuffer)
+	{
+		glDeleteRenderbuffersOES(1, &colorRenderbuffer);
+		colorRenderbuffer = 0;
+	}
 }
 
 @end
