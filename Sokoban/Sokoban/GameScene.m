@@ -192,7 +192,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 		}
         
         mainCharacter.currentAnimation.state = kAnimationState_Running;
-        [mainCharacter.currentAnimation updateWithDelta:aDelta];4
+        [mainCharacter.currentAnimation updateWithDelta:aDelta];
         
 //        float diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * cosf(angleToMove));
         float xDiff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
