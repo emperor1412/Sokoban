@@ -18,6 +18,8 @@
     NSString *_spriteSheetImageName;
         
     CGPoint _location;
+    
+
 }
 
 @property (nonatomic, retain, setter = setSpriteSheetPlayer:) SpriteSheet *spriteSheetPlayer;

@@ -232,6 +232,8 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         }
         
         
+        
+        
         diff = ((aDelta * (_velocity * _acceleration)) * sinf( angleToMove));
         diff = 1.0 * sinf( angleToMove);        // constant velocity, remove this line to have versatile velocity
 //        printf("diff-y = %f\n",diff);
@@ -250,6 +252,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         
         // check collision with rocks
         NSMutableArray *rocks = aScene->rocks;
+        
+        [rocks description];
+        
         for (Rock *rock in rocks) {
 
             if (CGRectIntersectsRect([self collisionBounds], [rock collisionBoundsForAngle:angleToMove])) {
