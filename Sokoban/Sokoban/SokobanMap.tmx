@@ -13,13 +13,18 @@
    H4sIAAAAAAAAA2NkYGBgpDHmAGI+NMyJJC+MRY8whfLcSHaA2Lxodopi0SdMQJ4bzQ9cVAgbAMRi2zmAAQAA
   </data>
  </layer>
+ <layer name="Finish Condition" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGJngHIXy1AIA0ccXvoABAAA=
+  </data>
+ </layer>
  <layer name="Collision" width="8" height="12">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAA2NgoD1YgAMjy2PTQ6n8AjQ2ujpy+OiYUgAAgwXnqoABAAA=
   </data>
  </layer>
  <objectgroup name="Rocks" width="8" height="12">
-  <object name="rock2" gid="204" x="120" y="247"/>
-  <object name="rock1" gid="204" x="165" y="247"/>
+  <object name="rock2" gid="204" x="120" y="240"/>
+  <object name="rock1" gid="204" x="160" y="240"/>
  </objectgroup>
 </map>
