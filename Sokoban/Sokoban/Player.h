@@ -16,7 +16,8 @@
     
     SpriteSheet *_spriteSheetPlayer;    
     NSString *_spriteSheetImageName;
-        
+
+    @public
     CGPoint _location;
     
 
@@ -29,6 +30,12 @@
 @property (nonatomic, setter = setAcceleration:) float acceleration;
 @property (nonatomic) float velocity;
 @property (nonatomic, setter = setAngleOfMovement:) float angleOfMovement;
+
+@property (nonatomic, retain)   Animation *leftAnimation;
+@property (nonatomic, retain)   Animation *rightAnimation;
+@property (nonatomic, retain)   Animation *upAnimation;
+@property (nonatomic, retain)   Animation *downAnimation;
+@property (nonatomic, assign)   Animation *currentAnimation;
 
 
 - (CGRect)movementBounds;

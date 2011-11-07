@@ -15,18 +15,14 @@
 - (void)updateLocationWithDelta:(float)aDelta scene:(GameScene*)aScene;
 - (void)populateSpriteToAnimations;
 - (void)setUpPlayer;
-BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize);
+//BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize);
 @end
 
 
 @interface Player() {
     
 }
-@property (nonatomic, retain)   Animation *leftAnimation;
-@property (nonatomic, retain)   Animation *rightAnimation;
-@property (nonatomic, retain)   Animation *upAnimation;
-@property (nonatomic, retain)   Animation *downAnimation;
-@property (nonatomic, assign)   Animation *currentAnimation;
+
 @end
 
 
@@ -94,7 +90,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 
 
 #pragma mark - get bounds
- - (CGRect)movementBounds {
+- (CGRect)movementBounds {
     return CGRectMake(_location.x - 12, _location.y - 18, 24, 36);
 }
 
@@ -163,7 +159,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 
 
 @implementation Player(Private)
-
+/*
 BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize) {
 	
 	BoundingBoxTileQuad bbtq;
@@ -186,7 +182,8 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 	
 	return bbtq;
 }
-
+ */
+/*
 - (void)updateLocationWithDelta:(float)aDelta scene:(GameScene *)aScene{
     if (_acceleration == 0) {
         currentAnimation.state = kAnimationState_Stopped;
@@ -258,7 +255,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         for (Rock *rock in rocks) {
 
             if (CGRectIntersectsRect([self collisionBounds], [rock collisionBoundsForAngle:angleToMove])) {
-                NSLog(@"Collision");
+//                NSLog(@"Collision");
             }
         }
         
@@ -270,14 +267,14 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         _velocity = CLAMP(_velocity, 0.5, 15);
     }
 }
-
+*/
 - (void)populateSpriteToAnimations {
     
     float delay = 0.1f;
-    self.leftAnimation = [[Animation alloc] init];
-    self.rightAnimation = [[Animation alloc] init];
-    self.upAnimation = [[Animation alloc] init];
-    self.downAnimation = [[Animation alloc] init];
+    self.leftAnimation = [[[Animation alloc] init] autorelease];
+    self.rightAnimation = [[[Animation alloc] init] autorelease];
+    self.upAnimation = [[[Animation alloc] init] autorelease];
+    self.downAnimation = [[[Animation alloc] init] autorelease];
     
     [leftAnimation addFrameWithImage:[_spriteSheetPlayer spriteImageAtCoords:CGPointMake(0, 3)] delay:delay];
     [leftAnimation addFrameWithImage:[_spriteSheetPlayer spriteImageAtCoords:CGPointMake(1, 3)] delay:delay];

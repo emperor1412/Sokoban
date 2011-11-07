@@ -48,6 +48,6 @@
 }
 
 - (BOOL)isBlocked:(float)x y:(float)y;
-
+- (void)updatePlayerLocationWithDelta:(float)aDelta;
 
 @end
