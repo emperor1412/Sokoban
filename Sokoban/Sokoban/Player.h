@@ -19,6 +19,8 @@
 
     @public
     CGPoint _location;
+    
+
 }
 
 @property (nonatomic, retain, setter = setSpriteSheetPlayer:) SpriteSheet *spriteSheetPlayer;
@@ -37,7 +39,7 @@
 
 
 - (CGRect)movementBounds;
-- (CGRect)collisionBounds;
+- (CGRect)collisionBoundsForAngle:(float)angle;
 - (void)updateWithDelta:(float)aDelta  scene:(GameScene *)aScene;
 - (id)initWithSpriteSheetImageNamed:(NSString *)fileName;
 

@@ -45,20 +45,11 @@
 
 #pragma mark - get bounds
 - (CGRect)movementBounds {
-    return CGRectMake(_location.x - 15, _location.y - 18, 30, 36);
+    return CGRectMake(_location.x - 17, _location.y - 17, 34, 34);
 }
 
-- (CGRect)collisionBoundsForAngle:(float)angle {
-    CGRect collisionBound;
-    if (angle == 0.0 || angle == M_PI) {
-        collisionBound = CGRectMake(_location.x - 15, _location.y - 18, 30, 20);   
-    }
-    else {
-        collisionBound = CGRectMake(_location.x - 15, _location.y - 18, 20, 30);   
-    }
-    
-    collisionBound = CGRectMake(_location.x - 20, _location.y - 20, 40, 40);
-    return collisionBound;
+- (CGRect)collisionBounds {
+    return CGRectMake(_location.x - 18, _location.y - 19, 36, 38);
 }
 
 @end

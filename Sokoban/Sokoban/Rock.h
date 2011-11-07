@@ -10,7 +10,8 @@
 #import "Image.h"
 
 @interface Rock : NSObject {
-
+    @public
+    CGPoint _location;
 }
 
 @property (assign) CGPoint tileCoord;
@@ -21,6 +22,6 @@
 - (id)initWithImage:(Image *)image;
 
 - (CGRect)movementBounds;
-- (CGRect)collisionBoundsForAngle:(float)angle;
+- (CGRect)collisionBounds;
 
 @end
