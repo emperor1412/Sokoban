@@ -42,6 +42,10 @@
     BOOL isJoypadTouchMoving;
     BOOL blockers[kMapWidth][kMapHeight];
     
+    CGRect characterCollisionBounds;
+    CGRect rockCollisionBounds[2];
+
+    
 @public
     NSMutableArray *rocks;
     

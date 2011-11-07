@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		278CB0751463059C003931A8 /* SokobanMap.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 278CB0741463059C003931A8 /* SokobanMap.tmx */; };
+		5C9950571467CBF5006E0F46 /* pilow2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5C9950561467CBF5006E0F46 /* pilow2.png */; };
 		5CA9785B1463E8800018154E /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA9785A1463E8800018154E /* rock.png */; };
 		5CA9785F1463F1E30018154E /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA9785E1463F1E30018154E /* Rock.m */; };
 		5CA978621463F8C90018154E /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA978611463F8C90018154E /* Primitives.m */; };
@@ -51,6 +52,7 @@
 
 /* Begin PBXFileReference section */
 		278CB0741463059C003931A8 /* SokobanMap.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = SokobanMap.tmx; sourceTree = "<group>"; };
+		5C9950561467CBF5006E0F46 /* pilow2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pilow2.png; sourceTree = "<group>"; };
 		5CA9785A1463E8800018154E /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		5CA9785D1463F1E30018154E /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
 		5CA9785E1463F1E30018154E /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 		5CE9B80D145FE8E70026F24C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5C9950561467CBF5006E0F46 /* pilow2.png */,
 				5CA9785A1463E8800018154E /* rock.png */,
 				5CE9B853146120910026F24C /* tile.png */,
 				5CE9B84D146101AF0026F24C /* joypad.png */,
@@ -445,6 +448,7 @@
 				5CE9B8871462B2480026F24C /* newTileAtlas 2.png in Resources */,
 				278CB0751463059C003931A8 /* SokobanMap.tmx in Resources */,
 				5CA9785B1463E8800018154E /* rock.png in Resources */,
+				5C9950571467CBF5006E0F46 /* pilow2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

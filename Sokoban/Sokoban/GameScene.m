@@ -18,13 +18,15 @@
 #import "Primitives.h"
 
 
+
+
 @interface GameScene(Private)    
 BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize);
 @end
 
 
-@implementation GameScene
 
+@implementation GameScene
 
 #pragma mark - dealloc
 - (void)dealloc {
@@ -34,6 +36,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     [tiledMap release];
 	[super dealloc];
 }
+
 
 
 
@@ -57,7 +60,10 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 								  joypadRectSize.height * 2);
             
         mainCharacter = [[Player alloc] init];
-        mainCharacter.location = CGPointMake(160, 240);
+        mainCharacter.location = CGPointMake(160, 220);
+        mainCharacter.velocity = 0.5;
+        mainCharacter.acceleration = 0.0;
+        mainCharacter.angleOfMovement = 0.0;
         
         tiledMap = [[TiledMap alloc] initWithFileName:@"SokobanMap" fileExtension:@"tmx"];
         NSLog(@"layer's count = %d",[tiledMap.layers count]);
@@ -95,9 +101,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         
         NSLog(@"tileSet's last object : %@",[tiledMap.tileSets lastObject]);
         
-        mainCharacter.velocity = 0.5;
-        mainCharacter.acceleration = 0.0;
-        mainCharacter.angleOfMovement = 0.0;
+        
 
 	}
 	return self;
@@ -110,8 +114,8 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 - (void)updateSceneWithDelta:(float)aDelta {	
     
     [self updatePlayerLocationWithDelta:aDelta];
-//    [mainCharacter updateWithDelta:aDelta scene:self];  
-//    DLog(@"position : %@",NSStringFromCGPoint(mainCharacter.location));
+    //    [mainCharacter updateWithDelta:aDelta scene:self];  
+    //    DLog(@"position : %@",NSStringFromCGPoint(mainCharacter.location));
 }
 
 - (void)updatePlayerLocationWithDelta:(float)aDelta {
@@ -123,7 +127,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     else {
         CGPoint oldPosition = mainCharacter.location;        
         float angleToMove = 0.0;
-                
+        
         if (mainCharacter.angleOfMovement >= -3*M_PI_4 && mainCharacter.angleOfMovement < -M_PI_4) {
 			mainCharacter.currentAnimation = mainCharacter.downAnimation;
             angleToMove = M_PI_2;
@@ -141,10 +145,13 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 			mainCharacter.currentAnimation = mainCharacter.leftAnimation;
 		}
         
-        float diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * cosf(angleToMove));
-        diff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
+        mainCharacter.currentAnimation.state = kAnimationState_Running;
+        [mainCharacter.currentAnimation updateWithDelta:aDelta];
+        
+//        float diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * cosf(angleToMove));
+        float xDiff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
         //        printf("velo = %f   -   accel = %f  -   angle = %f  -   diff-x = %f  -    ", mainCharacter.velocity, mainCharacter.acceleration, angleToMove, diff);
-        mainCharacter->_location.x -= diff;
+        mainCharacter->_location.x -= xDiff;
         
         CGRect movementBounds = [mainCharacter movementBounds];
         BoundingBoxTileQuad bbtq = getTileCoordsForBoundingRect(movementBounds, CGSizeMake(kTile_Width, kTile_Height));
@@ -154,13 +161,14 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             [self isBlocked:bbtq.x3 y:bbtq.y3] ||
             [self isBlocked:bbtq.x4 y:bbtq.y4]) {
             mainCharacter->_location.x = oldPosition.x;
+            return;
         }
-                
-        diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * sinf( angleToMove));
-        diff = 1.0 * sinf( angleToMove);        // constant velocity, remove this line to have versatile velocity
+        
+//        diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * sinf( angleToMove));
+        float yDiff = 1.0 * sinf( angleToMove);        // constant velocity, remove this line to have versatile velocity
         //        printf("diff-y = %f\n",diff);
         
-        mainCharacter->_location.y -= diff;
+        mainCharacter->_location.y -= yDiff;
         
         movementBounds = [mainCharacter movementBounds];
         bbtq = getTileCoordsForBoundingRect(movementBounds, CGSizeMake(kTile_Width, kTile_Height));
@@ -170,22 +178,72 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             [self isBlocked:bbtq.x3 y:bbtq.y3] ||
             [self isBlocked:bbtq.x4 y:bbtq.y4]) {
             mainCharacter->_location.y = oldPosition.y;
-        }
+            return;
+        }    
         
+        characterCollisionBounds = [mainCharacter collisionBoundsForAngle:angleToMove];
+        int i = 0;
         // check collision with rocks
         for (Rock *rock in rocks) {
-            
-            if (CGRectIntersectsRect([mainCharacter collisionBounds], [rock collisionBoundsForAngle:angleToMove])) {
+            rockCollisionBounds[i] = [rock collisionBounds];
+            if (CGRectIntersectsRect(characterCollisionBounds, rockCollisionBounds[i])) {
                 NSLog(@"Collision");
+                if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds)) {
+                    NSLog(@"Move the rock");
+                    CGPoint oldRockPosition = rock.location;
+                    
+                    rock->_location.x -= xDiff;
+                    bbtq = getTileCoordsForBoundingRect([rock movementBounds], CGSizeMake(kTile_Width, kTile_Height));
+
+
+                    
+                    // check collision with bounding box
+                    if ([self isBlocked:bbtq.x1 y:bbtq.y1] ||
+                        [self isBlocked:bbtq.x2 y:bbtq.y2] || 
+                        [self isBlocked:bbtq.x3 y:bbtq.y3] ||
+                        [self isBlocked:bbtq.x4 y:bbtq.y4]) {
+                        mainCharacter->_location.x = oldPosition.x;
+                        rock->_location.x = oldRockPosition.x;
+                        return;
+                    }
+                    
+                    rock->_location.y -= yDiff;
+                    bbtq = getTileCoordsForBoundingRect([rock movementBounds], CGSizeMake(kTile_Width, kTile_Height));
+                    // check collision with bounding box
+                    if ([self isBlocked:bbtq.x1 y:bbtq.y1] ||
+                        [self isBlocked:bbtq.x2 y:bbtq.y2] || 
+                        [self isBlocked:bbtq.x3 y:bbtq.y3] ||
+                        [self isBlocked:bbtq.x4 y:bbtq.y4]) {
+                        mainCharacter->_location.y = oldPosition.y;
+                        rock->_location.y = oldRockPosition.y;
+                        return;
+                    }
+                    
+                    for (Rock *rock1 in rocks) {
+                        if (rock1 != rock && CGRectIntersectsRect([rock1 movementBounds], [rock movementBounds])) {
+                            mainCharacter->_location.x = oldPosition.x;
+                            rock->_location.x = oldRockPosition.x;
+                            mainCharacter->_location.y = oldPosition.y;
+                            rock->_location.y = oldRockPosition.y;
+                            break;
+                        }
+                    }
+                }
+                else {
+                    mainCharacter->_location.x = oldPosition.x;
+                    mainCharacter->_location.y = oldPosition.y;                    
+                }
+                break;
             }
+            ++i;
         }
-                        
-        mainCharacter.currentAnimation.state = kAnimationState_Running;
-        [mainCharacter.currentAnimation updateWithDelta:aDelta];
         
-        mainCharacter.velocity += mainCharacter.acceleration;
-        mainCharacter.velocity = CLAMP(mainCharacter.velocity, 0.5, 15);
-}
+        
+        
+//        mainCharacter.velocity += mainCharacter.acceleration;
+//        mainCharacter.velocity = CLAMP(mainCharacter.velocity, 0.5, 15);
+    }
+    
 }
 
 - (void)renderScene {
@@ -201,9 +259,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
-    drawRect([mainCharacter collisionBounds]);
-    for (Rock *rock in rocks) {
-        drawRect([rock movementBounds]);
+    drawRect(characterCollisionBounds);
+    for (int i = 0; i < 2; ++i) {
+        drawRect(rockCollisionBounds[i]);
     }
 }
 
@@ -250,6 +308,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 	// Return the blocked status of the specified tile
     return blockers[(int)x][(int)y];
 }
+
 
 
 

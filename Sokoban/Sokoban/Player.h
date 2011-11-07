@@ -39,7 +39,7 @@
 
 
 - (CGRect)movementBounds;
-- (CGRect)collisionBounds;
+- (CGRect)collisionBoundsForAngle:(float)angle;
 - (void)updateWithDelta:(float)aDelta  scene:(GameScene *)aScene;
 - (id)initWithSpriteSheetImageNamed:(NSString *)fileName;
 

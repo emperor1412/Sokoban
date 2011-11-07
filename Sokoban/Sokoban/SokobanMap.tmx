@@ -20,6 +20,6 @@
  </layer>
  <objectgroup name="Rocks" width="8" height="12">
   <object name="rock2" gid="204" x="120" y="247"/>
-  <object name="rock1" gid="204" x="164" y="248"/>
+  <object name="rock1" gid="204" x="165" y="247"/>
  </objectgroup>
 </map>
