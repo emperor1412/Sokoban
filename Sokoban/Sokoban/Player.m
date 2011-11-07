@@ -12,7 +12,7 @@
 
 
 @interface Player(Private)
-- (void)updateLocationWithDelta:(float)aDelta scene:(GameScene*)aScene;
+//- (void)updateLocationWithDelta:(float)aDelta scene:(GameScene*)aScene;
 - (void)populateSpriteToAnimations;
 - (void)setUpPlayer;
 //BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize);
@@ -79,7 +79,7 @@
 
 #pragma mark - player update logic and rendering
 - (void)updateWithDelta:(float)aDelta scene:(GameScene *)aScene {
-    [self updateLocationWithDelta:aDelta scene:aScene];
+//    [self updateLocationWithDelta:aDelta scene:aScene];
 }
 
 - (void)render {
@@ -298,6 +298,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     }
 }
 */
+
 - (void)populateSpriteToAnimations {
     
     float delay = 0.1f;

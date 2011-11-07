@@ -10,7 +10,7 @@
  </tileset>
  <layer name="MapLayer" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NkYGBgpDHmAGI+NMyJJC+MRY8whfLcSHaA2Lxodopi0SdMQJ4bzQ9cVAgbAMRi2zmAAQAA
+   H4sIAAAAAAAAA2NkYGBgpDHmAGI+NMyJJC8MxOeh7PNIYoxobGQ16PLo+rmR7ACxeZH4IDWiaGagm4NNnhvND1xUCBsAG0APz4ABAAA=
   </data>
  </layer>
  <layer name="Finish Condition" width="8" height="12">

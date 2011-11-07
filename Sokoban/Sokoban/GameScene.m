@@ -166,8 +166,6 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         mainCharacter.velocity = 0.5;
     }
     else {
-        mainCharacter.acceleration = 0.0;        
-        elapsedTime -= 0.1;
         
         CGPoint oldPosition = mainCharacter.location;        
         float angleToMove = 0.0;
@@ -193,7 +191,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         [mainCharacter.currentAnimation updateWithDelta:aDelta];
         
 //        float diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * cosf(angleToMove));
-        float xDiff = 20.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
+        float xDiff = 1.0 * cosf(angleToMove);  // constant velocity, remove this line to have versatile velocity
         //        printf("velo = %f   -   accel = %f  -   angle = %f  -   diff-x = %f  -    ", mainCharacter.velocity, mainCharacter.acceleration, angleToMove, diff);
         mainCharacter->_location.x -= xDiff;
         
@@ -209,7 +207,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         }
         
 //        diff = ((aDelta * (mainCharacter.velocity * mainCharacter.acceleration)) * sinf( angleToMove));
-        float yDiff = 20.0 * sinf(angleToMove);        // constant velocity, remove this line to have versatile velocity
+        float yDiff = 1.0 * sinf(angleToMove);        // constant velocity, remove this line to have versatile velocity
         //        printf("diff-y = %f\n",diff);
         
         mainCharacter->_location.y -= yDiff;
@@ -232,7 +230,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             rockCollisionBounds[i] = [rock collisionBounds];
             if (CGRectIntersectsRect(characterCollisionBounds, rockCollisionBounds[i])) {
                 NSLog(@"Collision");
-                if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds)) {   // the character collide with one of the rocks
+                if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds)) {   // the character collides with one of the rocks
                     NSLog(@"Move the rock");
                     CGPoint oldRockPosition = rock.location;
                     
@@ -375,7 +373,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             
             mainCharacter.acceleration = CLAMP(distance/4, 0, 10);
             mainCharacter.angleOfMovement = directionOfTravel;
-            elapsedTime = 0.4;
+//            elapsedTime = 0.4;
 
         }        
     }
@@ -403,10 +401,10 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             
 //            printf("distance = %f   -    angle = %f\n", distance, RADIANS_TO_DEGREES(directionOfTravel));
             
-//            mainCharacter.acceleration = CLAMP(distance/4, 0, 10);
-//            mainCharacter.angleOfMovement = directionOfTravel;
+            mainCharacter.acceleration = CLAMP(distance/4, 0, 10);
+            mainCharacter.angleOfMovement = directionOfTravel;
             
-            mainCharacter.acceleration = 0.0;
+//            mainCharacter.acceleration = 0.0;
 		}
     }
 }
