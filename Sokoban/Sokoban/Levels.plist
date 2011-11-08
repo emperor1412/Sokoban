@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Levels</key>
+	<dict>
+		<key>TotalLevels</key>
+		<integer>2</integer>
+		<key>LevelsContent</key>
+		<array>
+			<string>SokobanMap.tmx</string>
+			<string>level1.tmx</string>
+		</array>
+	</dict>
+</dict>
+</plist>

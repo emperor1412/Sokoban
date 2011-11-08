@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "EAGLView.h"
+#import "GameController.h"
+
 
 @interface GLViewController : UIViewController
 - (IBAction)replay:(id)sender;
+- (IBAction)nextLevel:(id)sender;
+- (IBAction)previousLevel:(id)sender;
+@property (retain, nonatomic) IBOutlet UILabel *winGameLabel;
+
 
 - (void)startAnimation;
 - (void)stopAnimation;
+
+- (void)showWinGame;
+- (void)hideWinGame;
 
 @end

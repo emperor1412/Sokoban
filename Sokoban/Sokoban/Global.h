@@ -22,6 +22,11 @@
 #define DEBUG 1
 #define SCB 0
 
+#define kTileIDBlock 159
+#define kTileIDFinishPoint 205
+#define kTileIDStartPoint 145
+
+
 #pragma mark -
 #pragma mark Macros
 

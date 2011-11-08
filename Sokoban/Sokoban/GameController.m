@@ -9,7 +9,8 @@
 #import "GameController.h"
 #import "GameScene.h"
 #import "Global.h"
-
+#import "AppDelegate.h"
+#import "GLViewController.h"
 
 
 
@@ -43,6 +44,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
 
 - (void)dealloc {
     [gameScenes release];
+    [levels release];
+
     [super dealloc];
 }
 
@@ -73,6 +76,36 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
     return returnPoint;
 }
 
+
+
+
+#pragma mark - control level
+- (void)nextLevel {
+    if (currentLevel + 1 < [levels count]) {
+        ++currentLevel;
+        NSString *levelFileName = [levels objectAtIndex:currentLevel];
+        [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
+
+    }
+}
+
+- (void)previousLevel {
+    if (currentLevel - 1 >= 0) {
+        --currentLevel;
+        NSString *levelFileName = [levels objectAtIndex:currentLevel];
+        [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
+    }
+}
+
+- (void)replay {
+    NSString *levelFileName = [levels objectAtIndex:currentLevel];
+    [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
+}
+
+- (void)winGameAction {
+    [glViewController showWinGame];
+}
+
 @end
 
 
@@ -101,6 +134,23 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
 	currentScene = [gameScenes objectForKey:@"game"];
     
     if(DEBUG) NSLog(@"INFO - GameController: Finished game initialization.");
+    
+    
+
+     
+    NSString *path =  [[NSBundle mainBundle] pathForResource:@"Levels" ofType:@"plist"];
+    NSDictionary *dic = [NSDictionary dictionaryWithContentsOfFile:path];
+    levels = [[[dic objectForKey:@"Levels"] objectForKey:@"LevelsContent"] retain];
+    
+    currentLevel = 0;
+    
+    NSString *levelFileName = [levels objectAtIndex:currentLevel];
+    [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
+    
+    glViewController = ((AppDelegate *)[UIApplication sharedApplication].delegate).glViewController;
+    
+    NSLog(@"levels : %@",dic);
+    
 }
 
 

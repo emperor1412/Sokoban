@@ -2,29 +2,25 @@
 <map version="1.0" orientation="orthogonal" width="8" height="12" tilewidth="40" tileheight="40">
  <tileset firstgid="1" name="newTileAtlas 2" tilewidth="40" tileheight="40" spacing="1">
   <image source="newTileAtlas 2.png" width="1024" height="512"/>
-  <tile id="159">
-   <properties>
-    <property name="blocker" value="1"/>
-   </properties>
-  </tile>
  </tileset>
  <layer name="MapLayer" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NkYGBgpDHmAGI+NMyJJC+MRY8whfLcSHaA2Lxodopi0SdMQJ4bzQ9cVAgbAMRi2zmAAQAA
+   H4sIAAAAAAAAA1NiYGBQR8OqQBwOxXpIbGxixMqrQTG58rjMV8bibmx6kMUJySsjmaWEZL4KDrNEkTA2szTRsAaSWQAD+U2BgAEAAA==
   </data>
  </layer>
  <layer name="Finish Condition" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGB5gEonqz1EoTy0AAIjOAkiAAQAA
+   H4sIAAAAAAAAA2NgGHgwaaAdQCE4h4RJBQCmstzfgAEAAA==
   </data>
  </layer>
  <layer name="Collision" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgoD1YgAMjy2PTQ6n8AjQ2ujpy+OiYUgAAgwXnqoABAAA=
+   H4sIAAAAAAAAA1vAwMCwAAuGAWQ2NjFi5RegsUmVx2c+MsalB90uQvLobGQxcszChkEAAD58MFKAAQAA
   </data>
  </layer>
  <objectgroup name="Rocks" width="8" height="12">
-  <object name="rock2" gid="204" x="120" y="240"/>
-  <object name="rock1" gid="204" x="160" y="240"/>
+  <object name="rock1" gid="204" x="160" y="120"/>
+  <object name="rock2" gid="204" x="80" y="120"/>
+  <object name="rock3" gid="204" x="80" y="239"/>
  </objectgroup>
 </map>

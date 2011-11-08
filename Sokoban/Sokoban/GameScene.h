@@ -44,8 +44,6 @@
     
     CGRect characterCollisionBounds;
     CGRect rockCollisionBounds[2];
-
-    float elapsedTime;
     
     BOOL finishCondition[kMapWidth][kMapHeight];
     
@@ -56,5 +54,7 @@
 
 - (BOOL)isBlocked:(float)x y:(float)y;
 - (void)updatePlayerLocationWithDelta:(float)aDelta;
+
+- (void)setUpMapWithFileName:(NSString *)fileName fileExtension:(NSString *)extension;
 
 @end

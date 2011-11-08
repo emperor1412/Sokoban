@@ -45,8 +45,6 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 	self = [super init];
 	if (self != nil) {
         rocks = [[NSMutableArray alloc] init];
-
-//        glViewBounds = ((AppDelegate *)[UIApplication sharedApplication].delegate).glViewController.view.bounds;
         
 		sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         sharedGameController = [GameController sharedGameController];                    
@@ -60,73 +58,85 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 								  joypadRectSize.height * 2);
             
         mainCharacter = [[Player alloc] init];
-        mainCharacter.location = CGPointMake(180, 220);
+//        mainCharacter.location = CGPointMake(180, 220);
         mainCharacter.velocity = 0.5;
         mainCharacter.acceleration = 0.0;
         mainCharacter.angleOfMovement = 0.0;
         
-        tiledMap = [[TiledMap alloc] initWithFileName:@"SokobanMap" fileExtension:@"tmx"];
-        NSLog(@"layer's count = %d",[tiledMap.layers count]);
-
-        int collisionLayerIndex = [tiledMap layerIndexWithName:@"Collision"];
-        Layer *collisionLayer = [tiledMap.layers objectAtIndex:collisionLayerIndex];
-        int width = collisionLayer.layerWidth;
-        int height = collisionLayer.layerHeight;
-        
-        NSLog(@"width = %d  -   height = %d", width, height);
-                    
-        for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {                
-                int tileID = [collisionLayer tileIDAtTile:CGPointMake(x, y)];
-                printf("x = %d  -   y = %d  -   tileID = %d", x, y, tileID);                
-                if (tileID == 159) {  //  index of the rock in the tileset spritesheet picture , index is called ID, what a strange
-                    blockers[x][y] = YES;
-                }
-                printf("   -   %s\n", blockers[x][y] ? "YES" : "NO");
-            }
-        }
-        
-        
-        int finishConditionLayerIndex = [tiledMap layerIndexWithName:@"Finish Condition"];
-        Layer *finishConditionLayer = [tiledMap.layers objectAtIndex:finishConditionLayerIndex];
-        width = finishConditionLayer.layerWidth;
-        height = finishConditionLayer.layerHeight;
-        for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {
-                int tileID = [finishConditionLayer tileIDAtTile:CGPointMake(x, y)];
-                if (tileID == 205) {
-                    finishCondition[x][y] = YES;
-                }
-                NSLog(@"x = %d  -  y = %d   :  %@   -   tileID : %d",x, y, (finishCondition[x][y] ? @"YES" : @"NO"), tileID);
-            }
-        }
-        
-        
-        NSDictionary *objects = [[[tiledMap objectGroups] objectForKey:@"Rocks"] objectForKey:@"Objects"];
-        DLog(@"objects : %@",objects);
-        for (NSString *key in [objects allKeys]) {
-            NSDictionary *rockModel = [[objects objectForKey:key] objectForKey:@"Attributes"];
-            int xTileCoord = [[rockModel objectForKey:@"x"] intValue];
-            int yTileCoord = [[rockModel objectForKey:@"y"] intValue];
-            NSLog(@"xTile = %d      -       yTile = %d", xTileCoord, yTileCoord);
-            Image *rockImage = [[[Image alloc] initWithImageNamed:@"rock.png" filter:GL_LINEAR] autorelease];
-            Rock *rock = [[[Rock alloc] initWithImage:rockImage] autorelease];
-//            rock.location = CGPointMake(xTileCoord + kTile_Width/2 - 8, yTileCoord + kTile_Height/2 - 8);
-            rock.location = CGPointMake(xTileCoord + 20, yTileCoord + 20);
-            [rocks addObject:rock];
-            
-        }
-        
-        NSLog(@"tileSet's last object : %@",[tiledMap.tileSets lastObject]);
-        
-        
-        elapsedTime = 0.0f;
-
+        tiledMap = nil;
+//        [self setUpMapWithFileName:@"SokobanMap" fileExtension:@"tmx"];
 	}
 	return self;
 }
 
+- (void)setUpMapWithFileName:(NSString *)fileName fileExtension:(NSString *)extension {
+    
+    [tiledMap release];         // release old level
+    
+    tiledMap = [[TiledMap alloc] initWithFileName:fileName fileExtension:extension];
+    NSLog(@"layer's count = %d",[tiledMap.layers count]);
+    
+    
+    int collisionLayerIndex = [tiledMap layerIndexWithName:@"Collision"];
+    Layer *collisionLayer = [tiledMap.layers objectAtIndex:collisionLayerIndex];
+    int width = collisionLayer.layerWidth;
+    int height = collisionLayer.layerHeight;
+    
+    NSLog(@"width = %d  -   height = %d", width, height);
+    memset(blockers, 0, width * height);
+    
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {        
+            
+            int tileID = [collisionLayer tileIDAtTile:CGPointMake(x, y)];
+            printf("x = %d  -   y = %d  -   tileID = %d", x, y, tileID);                
+            if (tileID == kTileIDBlock) {  
+                blockers[x][y] = YES;
+            }
 
+            printf("   -   %s\n", blockers[x][y] ? "YES" : "NO");
+        }
+    }
+    
+    
+    int finishConditionLayerIndex = [tiledMap layerIndexWithName:@"Finish Condition"];
+    Layer *finishConditionLayer = [tiledMap.layers objectAtIndex:finishConditionLayerIndex];
+    width = finishConditionLayer.layerWidth;
+    height = finishConditionLayer.layerHeight;
+    memset(finishCondition, 0, width * height);
+    
+    for (int y = 0; y < height; ++y) {
+        for (int x = 0; x < width; ++x) {
+            
+            int tileID = [finishConditionLayer tileIDAtTile:CGPointMake(x, y)];
+            if (tileID == kTileIDFinishPoint) {
+                finishCondition[x][y] = YES;
+            }
+            if (tileID == kTileIDStartPoint) {
+                mainCharacter.location = CGPointMake(kTile_Width*x + 20, kTile_Height*y + 20);
+            }
+            NSLog(@"x = %d  -  y = %d   :  %@   -   tileID : %d",x, y, (finishCondition[x][y] ? @"YES" : @"NO"), tileID);
+        }
+    }
+    
+    
+    NSDictionary *objects = [[[tiledMap objectGroups] objectForKey:@"Rocks"] objectForKey:@"Objects"];
+    DLog(@"objects : %@",objects);
+    [rocks removeAllObjects];
+    for (NSString *key in [objects allKeys]) {
+        
+        NSDictionary *rockModel = [[objects objectForKey:key] objectForKey:@"Attributes"];
+        int xTileCoord = [[rockModel objectForKey:@"x"] intValue];
+        int yTileCoord = [[rockModel objectForKey:@"y"] intValue];
+        
+        NSLog(@"xTile = %d      -       yTile = %d", xTileCoord, yTileCoord);
+        
+        Image *rockImage = [[[Image alloc] initWithImageNamed:@"rock.png" filter:GL_LINEAR] autorelease];
+        Rock *rock = [[[Rock alloc] initWithImage:rockImage] autorelease];
+        rock.location = CGPointMake(xTileCoord + 20, 480 - yTileCoord + 20);
+        [rocks addObject:rock];            
+    }
+}
 
 
 #pragma mark - update logic and redering
@@ -158,13 +168,13 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         if (count == [rocks count]) {
             NSLog(@"Finish Game");
             [((AppDelegate *)[UIApplication sharedApplication].delegate).glViewController stopAnimation];
-            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"You Win"
-                                                             message:@""
-                                                            delegate:nil
-                                                   cancelButtonTitle:@"OK"
-                                                   otherButtonTitles:nil] autorelease];
-            [alert performSelector:@selector(show) withObject:nil afterDelay:0.5];
-            
+//            UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:@"You Win"
+//                                                             message:@""
+//                                                            delegate:nil
+//                                                   cancelButtonTitle:@"OK"
+//                                                   otherButtonTitles:nil] autorelease];
+//            [alert performSelector:@selector(show) withObject:nil afterDelay:0.5];
+            [sharedGameController winGameAction];
             return;
         }
 

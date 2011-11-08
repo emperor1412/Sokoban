@@ -9,7 +9,9 @@
 #import <OpenGLES/ES1/gl.h>
 #import "SynthesizeSingleton.h"
 
+
 @class AbstractScene;
+@class GLViewController;
 
 // Class responsbile for managing the games overall state and game scenes.
 //
@@ -18,6 +20,11 @@
     NSDictionary *gameScenes;
     // Current scene
     AbstractScene *currentScene;
+    
+    NSMutableArray *levels;
+    int currentLevel;
+    
+    GLViewController *glViewController;
 }
 
 @property (nonatomic, retain) AbstractScene *currentScene;
@@ -34,5 +41,11 @@
 
 // Returns an adjusted touch point based on the orientation of the device
 - (CGPoint)adjustTouchOrientationForTouch:(CGPoint)aTouch;
+
+- (void)nextLevel;
+- (void)previousLevel;
+- (void)replay;
+
+- (void)winGameAction;
 
 @end
