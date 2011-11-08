@@ -323,6 +323,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
+//    drawRect([mainCharacter movementBounds]);
 //    drawRect(characterCollisionBounds);
 //    for (int i = 0; i < 2; ++i) {
 //        drawRect(rockCollisionBounds[i]);

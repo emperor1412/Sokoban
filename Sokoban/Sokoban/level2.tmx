@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="8" height="12" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="newTileAtlas 2" tilewidth="40" tileheight="40" spacing="1">
+  <image source="newTileAtlas 2.png" width="1024" height="512"/>
+ </tileset>
+ <layer name="MapLayer" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA1vIwMCwkAA+D8QsjJg0TB7GRqbPDyH9yOacR9MfAcUgtiiSnCgOeWSMLo8NAwAwB1FygAEAAA==
+  </data>
+ </layer>
+ <layer name="Finish Condition" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA2NgGAXEgnM42MhiyJgYAACJ6AVugAEAAA==
+  </data>
+ </layer>
+ <layer name="Collision" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAA1vAwMCwgADGBZDl0Wl0+cGsH5c6dLMolceGAaptUN+AAQAA
+  </data>
+ </layer>
+ <objectgroup name="Rocks" width="8" height="12">
+  <object name="rock2" gid="204" x="200" y="160"/>
+  <object name="rock3" gid="204" x="80" y="160"/>
+  <object name="rock4" gid="204" x="120" y="240"/>
+  <object name="rock5" gid="204" x="200" y="240"/>
+  <object name="rock6" gid="204" x="120" y="320"/>
+  <object name="rock1" gid="204" x="200" y="120"/>
+ </objectgroup>
+</map>

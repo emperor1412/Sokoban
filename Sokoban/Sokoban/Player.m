@@ -91,7 +91,7 @@
 
 #pragma mark - get bounds
 - (CGRect)movementBounds {
-    return CGRectMake(_location.x - 12, _location.y - 18, 24, 36);
+    return CGRectMake(_location.x - 15, _location.y - 18, 30, 34);
 }
 
 - (CGRect)collisionBoundsForAngle:(float)angle {
