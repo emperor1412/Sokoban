@@ -5,7 +5,7 @@
  </tileset>
  <layer name="MapLayer" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA1vIwMCwkAA+D8QsjJg0TB7GRqbPDyH9yOacR9MfAcUgtiiSnCgOeWSMLo8NAwAwB1FygAEAAA==
+   H4sIAAAAAAAAA1vIwMCwkAAWA2JxLDRMXhwLLUZH/SAsikSLIekPRzMT3a5wBlR3iKHpj4BiEJuFEaEGxMYmj4zR5bFhAHbkXwWAAQAA
   </data>
  </layer>
  <layer name="Finish Condition" width="8" height="12">
@@ -15,13 +15,13 @@
  </layer>
  <layer name="Collision" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA1vAwMCwgADGBZDl0Wl0+cGsH5c6dLMolceGAaptUN+AAQAA
+   H4sIAAAAAAAAA1vAwMCwgADGBZDl0Wl0eVrqx6YXl5nYxHHZg+4WSuWxYQCHjCg1gAEAAA==
   </data>
  </layer>
  <objectgroup name="Rocks" width="8" height="12">
   <object name="rock2" gid="204" x="200" y="160"/>
   <object name="rock3" gid="204" x="80" y="160"/>
-  <object name="rock4" gid="204" x="120" y="240"/>
+  <object name="rock4" gid="204" x="80" y="240"/>
   <object name="rock5" gid="204" x="200" y="240"/>
   <object name="rock6" gid="204" x="120" y="320"/>
   <object name="rock1" gid="204" x="200" y="120"/>
