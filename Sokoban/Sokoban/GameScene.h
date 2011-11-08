@@ -45,7 +45,8 @@
     CGRect characterCollisionBounds;
     CGRect rockCollisionBounds[2];
     
-    BOOL finishCondition[kMapWidth][kMapHeight];
+    int finishCondition[kMapWidth][kMapHeight];
+//    BOOL **finishCondition;
     
 @public
     NSMutableArray *rocks;

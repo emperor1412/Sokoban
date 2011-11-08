@@ -5,17 +5,17 @@
  </tileset>
  <layer name="MapLayer" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA1NiYGBQR8OqQBwOxXpIbGxixMqrQTG58rjMV8bibmx6kMUJySsjmaWEZL4KDrNEkTA2szTRsAaSWQAD+U2BgAEAAA==
+   H4sIAAAAAAAAA1NiYGBQR8OqQBwOxXpAfB7KhtHKQKwBVaeHJodM6yHJq0FxOBJNinw4FvP1oW5BdzdMvz6aXnS/YJNH1ocuD+KLQtWJYpGHhYsuDnlkdZpArALEAHOzq2aAAQAA
   </data>
  </layer>
  <layer name="Finish Condition" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA2NgGHgwaaAdQCE4h4RJBQCmstzfgAEAAA==
+   H4sIAAAAAAAAA2NgGHgwaaAdQAI4h0YTUkcIAABYMx5rgAEAAA==
   </data>
  </layer>
  <layer name="Collision" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA1vAwMCwAAuGAWQ2NjFi5RegsUmVx2c+MsalB90uQvLobGQxcszChkEAAD58MFKAAQAA
+   H4sIAAAAAAAAA1vAwMCwAAuGAWQ2shg2tbjUYWOTKo/PfHS3oNMMJPIJ6ccnj80d6ABZHQAiXHeQgAEAAA==
   </data>
  </layer>
  <objectgroup name="Rocks" width="8" height="12">

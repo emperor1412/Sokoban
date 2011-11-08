@@ -8,7 +8,7 @@
 		<integer>2</integer>
 		<key>LevelsContent</key>
 		<array>
-			<string>SokobanMap.tmx</string>
+			<string>level0.tmx</string>
 			<string>level1.tmx</string>
 		</array>
 	</dict>

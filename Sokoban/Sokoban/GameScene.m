@@ -64,6 +64,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         mainCharacter.angleOfMovement = 0.0;
         
         tiledMap = nil;
+        
+//        finishCondition = malloc(sizeof(BOOL) * kMapWidth * kMapHeight);
+
 //        [self setUpMapWithFileName:@"SokobanMap" fileExtension:@"tmx"];
 	}
 	return self;
@@ -83,7 +86,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     int height = collisionLayer.layerHeight;
     
     NSLog(@"width = %d  -   height = %d", width, height);
-    memset(blockers, 0, width * height);
+//    memset(blockers, 0, width * height);
     
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {        
@@ -92,6 +95,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             printf("x = %d  -   y = %d  -   tileID = %d", x, y, tileID);                
             if (tileID == kTileIDBlock) {  
                 blockers[x][y] = YES;
+            }
+            else {
+                blockers[x][y] = NO;
             }
 
             printf("   -   %s\n", blockers[x][y] ? "YES" : "NO");
@@ -103,15 +109,20 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
     Layer *finishConditionLayer = [tiledMap.layers objectAtIndex:finishConditionLayerIndex];
     width = finishConditionLayer.layerWidth;
     height = finishConditionLayer.layerHeight;
-    memset(finishCondition, 0, width * height);
+//    memset(finishCondition, 0, width * height);
     
     for (int y = 0; y < height; ++y) {
         for (int x = 0; x < width; ++x) {
             
             int tileID = [finishConditionLayer tileIDAtTile:CGPointMake(x, y)];
             if (tileID == kTileIDFinishPoint) {
-                finishCondition[x][y] = YES;
+                finishCondition[x][y] = 2;
             }
+            else {
+                finishCondition[x][y] = 1;
+            }
+            
+            
             if (tileID == kTileIDStartPoint) {
                 mainCharacter.location = CGPointMake(kTile_Width*x + 20, kTile_Height*y + 20);
             }
@@ -159,7 +170,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             xTile = rock.location.x  / kTile_Width;
             yTile = rock.location.y  / kTile_Height;
             //        NSLog(@"xTile : %d  -   yTile : %d", xTile, yTile);
-            if (finishCondition[xTile][yTile]) {
+            if (finishCondition[xTile][yTile] == 2) {
                 ++count;
             }
             //        NSLog(@"xTile : %d  -   yTile : %d      -   count = %d", xTile, yTile, count);
@@ -273,7 +284,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
                     }
                     
                     for (Rock *rock1 in rocks) {   // check if the rock collide with other rocks
-                        if (rock1 != rock && CGRectIntersectsRect([rock1 movementBounds], [rock movementBounds])) {  // if collide, restore the position of rock and character with the old one
+                        if (rock1 != rock && CGRectIntersectsRect([rock1 collisionBounds], [rock collisionBounds])) {  // if collide, restore the position of rock and character with the old one
                             mainCharacter->_location.x = oldPosition.x;
                             rock->_location.x = oldRockPosition.x;
                             mainCharacter->_location.y = oldPosition.y;
