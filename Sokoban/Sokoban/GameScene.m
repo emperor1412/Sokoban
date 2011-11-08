@@ -49,9 +49,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 		sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         sharedGameController = [GameController sharedGameController];                    
                 
-        joypad = [[Image alloc] initWithImageNamed:@"joypad.png" filter:GL_LINEAR];        
-        joypadCenter = CGPointMake(50, 50);
-		joypadRectSize = CGSizeMake(40, 40);
+        joypad = [[Image alloc] initWithImageNamed:@"joypad2.png" filter:GL_LINEAR];        
+        joypadCenter = CGPointMake(40, 40);
+		joypadRectSize = CGSizeMake(34, 34);
 		joypadBounds = CGRectMake(joypadCenter.x - joypadRectSize.width, 
 								  joypadCenter.y - joypadRectSize.height, 
 								  joypadRectSize.width * 2, 
@@ -142,11 +142,13 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         
         NSLog(@"xTile = %d      -       yTile = %d", xTileCoord, yTileCoord);
         
-        Image *rockImage = [[[Image alloc] initWithImageNamed:@"rock.png" filter:GL_LINEAR] autorelease];
+        Image *rockImage = [[[Image alloc] initWithImageNamed:@"pilow2.png" filter:GL_LINEAR] autorelease];
         Rock *rock = [[[Rock alloc] initWithImage:rockImage] autorelease];
         rock.location = CGPointMake(xTileCoord + 20, 480 - yTileCoord + 20);
         [rocks addObject:rock];            
     }
+    
+    
 }
 
 
@@ -253,6 +255,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         // check collision with rocks
         for (Rock *rock in rocks) {
             rockCollisionBounds[i] = [rock collisionBounds];
+            rockMovementBounds[i] = [rock movementBounds];
             if (CGRectIntersectsRect(characterCollisionBounds, rockCollisionBounds[i])) {
 //                NSLog(@"Collision");
                 if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds)) {   // the character collides with one of the rocks
@@ -324,9 +327,12 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
 //    drawRect([mainCharacter movementBounds]);
-//    drawRect(characterCollisionBounds);
-//    for (int i = 0; i < 2; ++i) {
-//        drawRect(rockCollisionBounds[i]);
+    drawRect(characterCollisionBounds);
+    for (int i = 0; i < [rocks count]; ++i) {
+        drawRect(rockCollisionBounds[i]);
+    }
+//    for (int i = 0; i < [rocks count]; ++i) {
+//        drawRect(rockMovementBounds[i]);
 //    }
 }
 

@@ -91,36 +91,36 @@
 
 #pragma mark - get bounds
 - (CGRect)movementBounds {
-    return CGRectMake(_location.x - 15, _location.y - 18, 30, 34);
+    return CGRectMake(_location.x - 12, _location.y - 16, 24, 30);
 }
 
 - (CGRect)collisionBoundsForAngle:(float)angle {
 //    NSLog(@"angle : %d      -      location : %@", (int)RADIANS_TO_DEGREES(angle), NSStringFromCGPoint(_location));
-    float width = 24;
-    float height = 30;            
-    int xFactor = -12;
-    int yFactor = -16;
+    float width = 20;
+    float height = 24;            
+    int xFactor = -10;
+    int yFactor = -14;
     
     int degree = (int)RADIANS_TO_DEGREES(angle);
     
     if (degree == 0) {
 //        xFactor = -12;
-//        yFactor = -15;
+        yFactor = -15;
         width = 1;
     }
     else if (degree == 90) {
 //        xFactor = -12;
-        yFactor = -17;
+        yFactor = -15;
         height = 1;
     }
     else if (degree == 180) {
-        xFactor = 12;
+        xFactor = 10;
 //        yFactor = -15;
         width = 1;        
     }
     else {
 //        xFactor = -12;
-        yFactor = 16;
+        yFactor = 14;
         height = 1;
     }
     

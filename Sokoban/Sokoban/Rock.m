@@ -45,7 +45,7 @@
 
 #pragma mark - get bounds
 - (CGRect)movementBounds {
-    return CGRectMake(_location.x - 17, _location.y - 17, 34, 34);
+    return CGRectMake(_location.x - 15, _location.y - 16, 30, 30);
 }
 
 - (CGRect)collisionBounds {

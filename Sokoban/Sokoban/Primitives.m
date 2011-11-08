@@ -25,14 +25,26 @@ void drawRect(CGRect aRect) {
 	vertices[5] = aRect.origin.y + aRect.size.height;
 	vertices[6] = aRect.origin.x;
 	vertices[7] = aRect.origin.y + aRect.size.height;
+    
+    GLfloat color[] = { 
+        1.0, 0.0, 0.0, 1.0,
+        1.0, 1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0, 1.0,
+        1.0, 0.0, 1.0, 1.0,
+        1.0, 1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0, 1.0,
+        1.0, 1.0, 0.0, 1.0,
+        1.0, 0.0, 1.0, 1.0
+    };
 	
 	// Disable the color array and switch off texturing
-	glDisableClientState(GL_COLOR_ARRAY);
+//	glDisableClientState(GL_COLOR_ARRAY);
 	glDisable(GL_TEXTURE_2D);
 	
 	// Set up the vertex pointer to the array of vertices we have created and
 	// then use GL_LINE_LOOP to render them
 	glVertexPointer(2, GL_FLOAT, 0, vertices);
+    glColorPointer(4, GL_FLOAT, 0, color);
 	glDrawArrays(GL_LINE_LOOP, 0, 4);
 	
 	// Switch the color array back on and enable textures.  This is the default state

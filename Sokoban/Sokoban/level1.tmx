@@ -5,7 +5,7 @@
  </tileset>
  <layer name="MapLayer" width="8" height="12">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAA1NiYGBQR8OqQBwOxXpAfB7KhtHKQKwBVaeHJodM6yHJq0FxOBJNinw4FvP1oW5BdzdMvz6aXnS/YJNH1ocuD+KLQtWJYpGHhYsuDnlkdZpArALEAHOzq2aAAQAA
+   H4sIAAAAAAAAA1NiYGBQR8OqQBwOxXpIbBhWBmINqDps8sh6YfJqUByORJMijw3rQ92C7m41JHl096Drxyavj0MexBeFqhPFIg8LF10c8sjqNIFYBYgBH7s/hoABAAA=
   </data>
  </layer>
  <layer name="Finish Condition" width="8" height="12">

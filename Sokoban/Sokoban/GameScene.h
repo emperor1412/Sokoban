@@ -43,7 +43,8 @@
     BOOL blockers[kMapWidth][kMapHeight];
     
     CGRect characterCollisionBounds;
-    CGRect rockCollisionBounds[2];
+    CGRect rockCollisionBounds[10];
+    CGRect rockMovementBounds[10];
     
     int finishCondition[kMapWidth][kMapHeight];
 //    BOOL **finishCondition;

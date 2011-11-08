@@ -14,6 +14,7 @@
 		5CA24AB614690181007416F5 /* level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AB514690181007416F5 /* level1.tmx */; };
 		5CA24AB814691260007416F5 /* level0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AB71469125F007416F5 /* level0.tmx */; };
 		5CA24ABA14691A1E007416F5 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AB914691A1E007416F5 /* level2.tmx */; };
+		5CA24ABC14692360007416F5 /* joypad2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24ABB14692360007416F5 /* joypad2.png */; };
 		5CA9785B1463E8800018154E /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA9785A1463E8800018154E /* rock.png */; };
 		5CA9785F1463F1E30018154E /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA9785E1463F1E30018154E /* Rock.m */; };
 		5CA978621463F8C90018154E /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA978611463F8C90018154E /* Primitives.m */; };
@@ -64,6 +65,7 @@
 		5CA24AB514690181007416F5 /* level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level1.tmx; sourceTree = "<group>"; };
 		5CA24AB71469125F007416F5 /* level0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level0.tmx; sourceTree = "<group>"; };
 		5CA24AB914691A1E007416F5 /* level2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level2.tmx; sourceTree = "<group>"; };
+		5CA24ABB14692360007416F5 /* joypad2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joypad2.png; sourceTree = "<group>"; };
 		5CA9785A1463E8800018154E /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		5CA9785D1463F1E30018154E /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
 		5CA9785E1463F1E30018154E /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				5CA9785A1463E8800018154E /* rock.png */,
 				5CE9B853146120910026F24C /* tile.png */,
 				5CE9B84D146101AF0026F24C /* joypad.png */,
+				5CA24ABB14692360007416F5 /* joypad2.png */,
 				5CE9B82A146007580026F24C /* RobotSpriteSheet2.png */,
 				5CE9B80E145FE8F70026F24C /* coordinates.plist */,
 				5CE9B80F145FE8F70026F24C /* atlas.png */,
@@ -470,6 +473,7 @@
 				5CA24AB614690181007416F5 /* level1.tmx in Resources */,
 				5CA24AB814691260007416F5 /* level0.tmx in Resources */,
 				5CA24ABA14691A1E007416F5 /* level2.tmx in Resources */,
+				5CA24ABC14692360007416F5 /* joypad2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
