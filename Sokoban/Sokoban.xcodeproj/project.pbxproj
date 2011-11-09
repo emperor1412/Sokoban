@@ -15,6 +15,15 @@
 		5CA24AB814691260007416F5 /* level0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AB71469125F007416F5 /* level0.tmx */; };
 		5CA24ABA14691A1E007416F5 /* level2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AB914691A1E007416F5 /* level2.tmx */; };
 		5CA24ABC14692360007416F5 /* joypad2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24ABB14692360007416F5 /* joypad2.png */; };
+		5CA24AC6146A3496007416F5 /* beep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AC5146A3496007416F5 /* beep.wav */; };
+		5CA24AC9146A34B4007416F5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CA24AC8146A34B3007416F5 /* AudioToolbox.framework */; };
+		5CA24ACB146A3710007416F5 /* walk_crop.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24ACA146A3710007416F5 /* walk_crop.wav */; };
+		5CA24ACD146A3959007416F5 /* run.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24ACC146A3959007416F5 /* run.wav */; };
+		5CA24ACF146A3F36007416F5 /* footstep.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24ACE146A3F36007416F5 /* footstep.wav */; };
+		5CA24AD5146A5267007416F5 /* footstep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AD4146A5267007416F5 /* footstep2.wav */; };
+		5CA24AD7146A5380007416F5 /* footstep3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AD6146A5380007416F5 /* footstep3.wav */; };
+		5CA24AD9146A53E1007416F5 /* footstep4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24AD8146A53E1007416F5 /* footstep4.wav */; };
+		5CA24ADB146A5D11007416F5 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 5CA24ADA146A5D11007416F5 /* win.wav */; };
 		5CA9785B1463E8800018154E /* rock.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CA9785A1463E8800018154E /* rock.png */; };
 		5CA9785F1463F1E30018154E /* Rock.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA9785E1463F1E30018154E /* Rock.m */; };
 		5CA978621463F8C90018154E /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CA978611463F8C90018154E /* Primitives.m */; };
@@ -66,6 +75,15 @@
 		5CA24AB71469125F007416F5 /* level0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level0.tmx; sourceTree = "<group>"; };
 		5CA24AB914691A1E007416F5 /* level2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = level2.tmx; sourceTree = "<group>"; };
 		5CA24ABB14692360007416F5 /* joypad2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = joypad2.png; sourceTree = "<group>"; };
+		5CA24AC5146A3496007416F5 /* beep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = beep.wav; sourceTree = "<group>"; };
+		5CA24AC8146A34B3007416F5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5CA24ACA146A3710007416F5 /* walk_crop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = walk_crop.wav; sourceTree = "<group>"; };
+		5CA24ACC146A3959007416F5 /* run.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = run.wav; sourceTree = "<group>"; };
+		5CA24ACE146A3F36007416F5 /* footstep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = footstep.wav; sourceTree = "<group>"; };
+		5CA24AD4146A5267007416F5 /* footstep2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = footstep2.wav; sourceTree = "<group>"; };
+		5CA24AD6146A5380007416F5 /* footstep3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = footstep3.wav; sourceTree = "<group>"; };
+		5CA24AD8146A53E1007416F5 /* footstep4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = footstep4.wav; sourceTree = "<group>"; };
+		5CA24ADA146A5D11007416F5 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
 		5CA9785A1463E8800018154E /* rock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rock.png; sourceTree = "<group>"; };
 		5CA9785D1463F1E30018154E /* Rock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rock.h; sourceTree = "<group>"; };
 		5CA9785E1463F1E30018154E /* Rock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rock.m; sourceTree = "<group>"; };
@@ -142,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CA24AC9146A34B4007416F5 /* AudioToolbox.framework in Frameworks */,
 				5CE9B8821462AFB60026F24C /* libz.dylib in Frameworks */,
 				5CE9B825145FEA610026F24C /* QuartzCore.framework in Frameworks */,
 				5CE9B7D0145FE4E50026F24C /* OpenGLES.framework in Frameworks */,
@@ -174,6 +193,7 @@
 		5CE9B7B7145FE4C30026F24C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5CA24AC8146A34B3007416F5 /* AudioToolbox.framework */,
 				5CE9B8811462AFB50026F24C /* libz.dylib */,
 				5CE9B824145FEA610026F24C /* QuartzCore.framework */,
 				5CE9B7CF145FE4E50026F24C /* OpenGLES.framework */,
@@ -334,6 +354,7 @@
 		5CE9B80D145FE8E70026F24C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				5CA24ADA146A5D11007416F5 /* win.wav */,
 				5C9950561467CBF5006E0F46 /* pilow2.png */,
 				5CA9785A1463E8800018154E /* rock.png */,
 				5CE9B853146120910026F24C /* tile.png */,
@@ -344,6 +365,13 @@
 				5CE9B80F145FE8F70026F24C /* atlas.png */,
 				5CE9B810145FE8F70026F24C /* player_spritesheet.png */,
 				5CE9B811145FE8F70026F24C /* ghost_spritesheet.png */,
+				5CA24ACA146A3710007416F5 /* walk_crop.wav */,
+				5CA24AC5146A3496007416F5 /* beep.wav */,
+				5CA24ACC146A3959007416F5 /* run.wav */,
+				5CA24ACE146A3F36007416F5 /* footstep.wav */,
+				5CA24AD4146A5267007416F5 /* footstep2.wav */,
+				5CA24AD6146A5380007416F5 /* footstep3.wav */,
+				5CA24AD8146A53E1007416F5 /* footstep4.wav */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -474,6 +502,14 @@
 				5CA24AB814691260007416F5 /* level0.tmx in Resources */,
 				5CA24ABA14691A1E007416F5 /* level2.tmx in Resources */,
 				5CA24ABC14692360007416F5 /* joypad2.png in Resources */,
+				5CA24AC6146A3496007416F5 /* beep.wav in Resources */,
+				5CA24ACB146A3710007416F5 /* walk_crop.wav in Resources */,
+				5CA24ACD146A3959007416F5 /* run.wav in Resources */,
+				5CA24ACF146A3F36007416F5 /* footstep.wav in Resources */,
+				5CA24AD5146A5267007416F5 /* footstep2.wav in Resources */,
+				5CA24AD7146A5380007416F5 /* footstep3.wav in Resources */,
+				5CA24AD9146A53E1007416F5 /* footstep4.wav in Resources */,
+				5CA24ADB146A5D11007416F5 /* win.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

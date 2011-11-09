@@ -11,6 +11,7 @@
 #import "Global.h"
 #import "AppDelegate.h"
 #import "GLViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 
 
@@ -80,12 +81,14 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
 
 
 #pragma mark - control level
+static BOOL alreadyWin = NO;
+
 - (void)nextLevel {
     if (currentLevel + 1 < [levels count]) {
         ++currentLevel;
         NSString *levelFileName = [levels objectAtIndex:currentLevel];
         [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
-
+        alreadyWin = NO;
     }
 }
 
@@ -94,16 +97,28 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(GameController);
         --currentLevel;
         NSString *levelFileName = [levels objectAtIndex:currentLevel];
         [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
+        alreadyWin = NO;
     }
 }
 
 - (void)replay {
     NSString *levelFileName = [levels objectAtIndex:currentLevel];
     [(GameScene *)currentScene setUpMapWithFileName:[levelFileName stringByDeletingPathExtension] fileExtension:[levelFileName pathExtension]];
+    alreadyWin = NO;
 }
 
 - (void)winGameAction {
-    [glViewController showWinGame];
+    if (alreadyWin == NO) {
+        [glViewController showWinGame];
+        alreadyWin = YES;
+        
+        SystemSoundID mySound;
+        NSString *pewPewPath = [[NSBundle mainBundle] pathForResource:@"win" ofType:@"wav"];
+        NSURL *pewPewURL = [NSURL fileURLWithPath:pewPewPath];
+        AudioServicesCreateSystemSoundID((CFURLRef)pewPewURL, &mySound);
+        AudioServicesPlaySystemSound(mySound);
+    }
+
 }
 
 @end

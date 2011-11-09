@@ -17,7 +17,9 @@
 #import "Rock.h"
 #import "Primitives.h"
 
+#import <AudioToolbox/AudioToolbox.h>
 
+static SystemSoundID mySound;
 
 
 @interface GameScene(Private)    
@@ -49,9 +51,9 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 		sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         sharedGameController = [GameController sharedGameController];                    
                 
-        joypad = [[Image alloc] initWithImageNamed:@"joypad2.png" filter:GL_LINEAR];        
-        joypadCenter = CGPointMake(40, 40);
-		joypadRectSize = CGSizeMake(34, 34);
+        joypad = [[Image alloc] initWithImageNamed:@"joypad.png" filter:GL_LINEAR];        
+        joypadCenter = CGPointMake(50, 50);
+		joypadRectSize = CGSizeMake(40, 40);
 		joypadBounds = CGRectMake(joypadCenter.x - joypadRectSize.width, 
 								  joypadCenter.y - joypadRectSize.height, 
 								  joypadRectSize.width * 2, 
@@ -64,6 +66,11 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
         mainCharacter.angleOfMovement = 0.0;
         
         tiledMap = nil;
+        
+        
+        NSString *pewPewPath = [[NSBundle mainBundle] pathForResource:@"footstep4" ofType:@"wav"];
+        NSURL *pewPewURL = [NSURL fileURLWithPath:pewPewPath];
+        AudioServicesCreateSystemSoundID((CFURLRef)pewPewURL, &mySound);
         
 //        finishCondition = malloc(sizeof(BOOL) * kMapWidth * kMapHeight);
 
@@ -258,7 +265,7 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
             rockMovementBounds[i] = [rock movementBounds];
             if (CGRectIntersectsRect(characterCollisionBounds, rockCollisionBounds[i])) {
 //                NSLog(@"Collision");
-                if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds)) {   // the character collides with one of the rocks
+                if (CGRectContainsRect(rockCollisionBounds[i], characterCollisionBounds) || YES) {   // the character collides with one of the rocks
 //                    NSLog(@"Move the rock");
                     CGPoint oldRockPosition = rock.location;
                     
@@ -292,9 +299,18 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
                             rock->_location.x = oldRockPosition.x;
                             mainCharacter->_location.y = oldPosition.y;
                             rock->_location.y = oldRockPosition.y;
-                            break;
+                            return;
                         }
                     }
+                    
+                    
+                    static float lastTime = 0;
+                    float currentTime = CACurrentMediaTime();
+                    if (currentTime - lastTime > 0.15) {
+//                        AudioServicesPlaySystemSound(mySound);
+                        lastTime = currentTime;
+                    }
+                    
                 }
                 else {
                     mainCharacter->_location.x = oldPosition.x;
@@ -327,10 +343,10 @@ BoundingBoxTileQuad getTileCoordsForBoundingRect(CGRect aRect, CGSize aTileSize)
 	// Ask the image render manager to render all images in its render queue
 	[sharedImageRenderManager renderImages];
 //    drawRect([mainCharacter movementBounds]);
-    drawRect(characterCollisionBounds);
-    for (int i = 0; i < [rocks count]; ++i) {
-        drawRect(rockCollisionBounds[i]);
-    }
+//    drawRect(characterCollisionBounds);
+//    for (int i = 0; i < [rocks count]; ++i) {
+//        drawRect(rockCollisionBounds[i]);
+//    }
 //    for (int i = 0; i < [rocks count]; ++i) {
 //        drawRect(rockMovementBounds[i]);
 //    }

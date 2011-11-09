@@ -8,6 +8,8 @@
 
 #import "Animation.h"
 #import "Image.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import <QuartzCore/QuartzCore.h>
 
 
 @implementation Animation
@@ -18,6 +20,8 @@
 @synthesize currentFrame;
 @synthesize maxFrames;
 @synthesize bounceFrame;
+
+static SystemSoundID mySound;
 
 - (void)dealloc {
     
@@ -45,6 +49,10 @@
 		
 		// Initialize the array that will store the animation frames
         frames = calloc(maxFrames, sizeof(AnimationFrame));
+        
+        NSString *pewPewPath = [[NSBundle mainBundle] pathForResource:@"footstep4" ofType:@"wav"];
+        NSURL *pewPewURL = [NSURL fileURLWithPath:pewPewPath];
+        AudioServicesCreateSystemSoundID((CFURLRef)pewPewURL, &mySound);
 
     }
     return self;
@@ -79,6 +87,16 @@
     
     // If the displayTime has exceeded the current frames delay then switch frames
     if(displayTime > frames[currentFrame].delay) {
+        
+        
+        static float lastTime = 0;
+        float currentTime = CACurrentMediaTime();
+        if (currentTime - lastTime > 0.15) {
+            AudioServicesPlaySystemSound(mySound);
+            lastTime = currentTime;
+        }
+        
+        
         currentFrame += direction;
 
 		// Rather than set displayTime back to 0, we set it to the difference between the 
